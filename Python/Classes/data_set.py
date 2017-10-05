@@ -29,6 +29,5 @@ class DataSet(object):
                 for i in range(self.sum_confusion_matrix.shape[0]):
                         generalAcc+= self.sum_confusion_matrix[i,i]/(self.length*self.dataSet[0].number_of_testingSamples)
                 return generalAcc/self.sum_confusion_matrix.shape[0]
-                        
         def __str__(self):
                 return str(self.getGeneralAccurace())

@@ -23,9 +23,14 @@ for percent in [1,2]:
         for it in range(50):
                 oData = Data(7, 13)
                 oData.confusion_matrix = 13 * np.random.rand(7, 7)
-                oDataSet.append(oData, range(259), range(259,350))
+                a = np.arange(350)
+                np.random.shuffle(a)
+                t = a[:37*7]
+                b= []
+                for i in a:
+                        if not i in t:
+                                b.append(i)                    
+                oDataSet.append(oData, t, b)
         experimento.addDataSet(oDataSet, description="Dataset do M={:d}:".format(percent))
 print experimento
-                
-
 
