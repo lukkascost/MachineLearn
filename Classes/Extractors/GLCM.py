@@ -47,7 +47,7 @@ class GLCM:
                 self.coOccurenceNormalized = init + ((endValue*self.coOccurenceMatrix)/(self.input_array.shape[0]*(self.input_array.shape[1] -1))  ) 
                 
                                 
-        def calculate_attributes(self):  
+        def calculateAttributes(self):  
                 """
                 Calculate the 24 attributes of GLCM based on co Occurence matrix,
                 the attributes descriptions are:
@@ -146,7 +146,7 @@ class GLCM:
                         self.attributes[7]  += pow(i-self.attributes[8] ,2)*px_plus_y[i]
                 self.attributes = self.attributes[1:]
                 
-        def export_to_classfier(self, label):
+        def exportToClassfier(self, label):
                 """
                 Export extractor attributes in a numpy array with a label on last position.
                 Parameter label: it's a label to which each attributes belong.

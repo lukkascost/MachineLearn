@@ -111,7 +111,37 @@ gl = GLCM(np.array([[2,1,3,0],[0,1,1,3],[1,3,1,2],[0,1,0,2]]), 2)
 gl = GLCM(np_entrada, 2)
 gl.generateCoOccurenceHorizontal()
 gl.normalizeCoOccurence()
-gl.calculate_atributes()
+gl.calculateAttributes()
+```
+
+### ```exportToClassfier```
+
+Export extractor attributes in a numpy array with a label on last position.
+
+Parameter label: it's a label to which each attributes belong.
+
+sample of use:
+
+```
+from Classes.Extractors.GLCM import GLCM
+gl = GLCM(np.array([[2,1,3,0],[0,1,1,3],[1,3,1,2],[0,1,0,2]]), 2)
+gl = GLCM(np_entrada, 2)
+gl.generateCoOccurenceHorizontal()
+gl.normalizeCoOccurence()
+gl.calculateAttributes()
+print(gl.exportToClassfier(1.0))
+```
+
+as Result:
+
+```
+[  1.38888889e-01   2.83333333e+00   8.51049772e+01   1.81250000e+00
+   3.83333333e-01   1.00000000e+00   5.70242068e+00   5.89762289e-01
+   9.09729266e-01   2.77777778e-02   4.96706242e-01   3.44268165e-01
+   1.00000000e+00   0.00000000e+00   4.51388889e-01   1.33333333e+00
+   2.50000000e-01   6.08333333e+00   1.87916667e+01   6.06458333e+01
+   1.50000000e+00  -1.66666667e-01   1.41666667e+00   1.25925926e-02
+   1.00000000e+00]
 ```
 
 
