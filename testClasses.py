@@ -36,3 +36,13 @@ from Classes.Extractors.GLCM import GLCM
         #experimento.addDataSet(oDataSet, description="Dataset do M={:d}:".format(percent))
 #print experimento
 
+entrada = [[2,1,3,0],[0,1,1,3],[1,3,1,2],[0,1,0,2]]
+np_entrada  = np.array(entrada)
+gl = GLCM(np_entrada, 2)
+gl.generateCoOccurenceHorizontal()
+print gl.coOccurenceMatrix
+print
+gl.normalizeCoOccurence()
+print gl.coOccurenceNormalized
+gl.calculate_atributes()
+print gl.atributes
