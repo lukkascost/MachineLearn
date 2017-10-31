@@ -54,53 +54,56 @@ gl.normalizeCoOccurence()
 ### ```calculateAttributes```
 Calculate the 24 attributes of GLCM based on co Occurence matrix,
 the attributes descriptions are:
-01 - 
 
-02 - 
+01 - Angular Second Moment
 
-03 - 
+02 - Contrast
 
-04 -
+03 - Correlation
 
-05 - 
+04 - Sum of Squares
 
-06 - 
+05 - Inverse Difference Moment
 
-07 - 
+06 - Sum Average
 
-08 -
+07 - Sum Variance
 
-09 -
+08 - Sum Entropy
 
-10 - 
+09 - Entropy
 
-11 -
+10 - Difference Variance
 
-12 - 
+11 - Difference entropy
 
-13 - 
+12 - Information measures of correlation
 
-14 - 
+13 - Information measures of correlation
 
-15 - 
+14 - Maximal correlation coefficient
 
-16 - 
+15 - Homogeneity
 
-17 - 
+16 - sum Mean
 
-18 - 
+17 - Maximum Probability
 
-19 - 
+18 - Cluster Tendency
 
-20 - 
+19 - Cluster shade
 
-21 - 
+20 - Cluster prominence
 
-22 - 
+21 - Dissimilarity
 
-23 - 
+22 - Difference mean
 
-24 -
+23 - Autocorrelation
+
+24 -Inertia
+
+equations in paper: **Reducing costs of embedded image classfier** - [Paper](https://github.com/lukkascost)
 
 
 sample of use:
