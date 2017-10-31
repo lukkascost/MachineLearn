@@ -51,30 +51,30 @@ class GLCM:
                 """
                 Calculate the 24 attributes of GLCM based on co Occurence matrix,
                 the attributes descriptions are:
-                01 - 
-                02 - 
-                03 - 
-                04 -
-                05 - 
-                06 - 
-                07 - 
-                08 -
-                09 -
-                10 - 
-                11 -
-                12 - 
-                13 - 
-                14 - 
-                15 - 
-                16 - 
-                17 - 
-                18 - 
-                19 - 
-                20 - 
-                21 - 
-                22 - 
-                23 - 
-                24 - 
+                01 - Angular Second Moment
+                02 - Contrast
+                03 - Correlation
+                04 - Sum of Squares
+                05 - Inverse Difference Moment
+                06 - Sum Average
+                07 - Sum Variance
+                08 - Sum Entropy
+                09 - Entropy
+                10 - Difference Variance
+                11 - Difference entropy
+                12 - Information measures of correlation
+                13 - Information measures of correlation
+                14 - Maximal correlation coefficient
+                15 - Homogeneity
+                16 - sum Mean
+                17 - Maximum Probability
+                18 - Cluster Tendency
+                19 - Cluster shade
+                20 - Cluster prominence
+                21 - Dissimilarity
+                22 - Difference mean
+                23 - Autocorrelation
+                24 -Inertia
                 """
                 gray = self.coOccurenceMatrix.shape[0]
                 HXY1 = 0.0
