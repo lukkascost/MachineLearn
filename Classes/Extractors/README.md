@@ -2,13 +2,13 @@
 
 This project is a base, for the others machine learn and image process projects.
 
-##GLCM Class for extract atributes
-##Getting started
+## GLCM Class for extract atributes
 
+text here
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [Lucas Costa](https://github.com/lukkascost)
+* **Lucas Costa** - *Initial work* - [lukkascost](https://github.com/lukkascost)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
