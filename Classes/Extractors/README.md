@@ -146,11 +146,10 @@ as Result:
 
 
 
-
    
 ## Authors
 
 * **Lucas Costa** - [lukkascost](https://github.com/lukkascost)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/lukkascost/MachineLearn/contributors) who participated in this project.
 
