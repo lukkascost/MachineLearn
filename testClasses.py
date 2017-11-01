@@ -33,7 +33,6 @@ for percent in [1,2]:
                         if not i in t:
                                 b.append(i)                    
                 oDataSet.append(oData, t, b)
-                oDataSet.exportTestingSamples("testing_sample.txt")
         experimento.addDataSet(oDataSet, description="Dataset do M={:d}:".format(percent))
 print experimento
 
