@@ -34,7 +34,7 @@ class GLCM:
                 self.coOccurenceMatrix *=0
                 for i in range(0,self.input_array.shape[0]):
                         for j in range(0,self.input_array.shape[1]-step,step):
-                                self.coOccurenceMatrix[self.input_array[i,j], self.input_array[i,j+1]]+= 1
+                                self.coOccurenceMatrix[int(self.input_array[i,j]), int(self.input_array[i,j+1])]+= 1
                 if not(orientation):
                         self.coOccurenceMatrix = self.coOccurenceMatrix.T
                         
