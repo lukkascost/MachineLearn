@@ -1,8 +1,4 @@
-# MachineLearn
-
-This project is a base, for the others machine learn and image process projects.
-
-## GLCM Class for extract atributes
+# GLCM Class for extract atributes
 
 ### to generate a sample object use:
 ```
@@ -146,7 +142,7 @@ as Result:
    1.50000000e+00  -1.66666667e-01   1.41666667e+00   1.25925926e-02
    1.00000000e+00]
 ```
-## LBP
+# LBP
 
 
 
