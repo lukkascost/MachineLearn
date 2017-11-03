@@ -44,7 +44,7 @@ class DataSet(object):
                 testDataIndexes = allIndexes[ntraining:]
                 if self.indexSet == None:
                         self.indexSet = np.zeros((0,2))
-                self.indexSet = np.vstack((self.indexSet, np.array([traineIndexes,testIndexes])))
+                self.indexSet = np.vstack((self.indexSet, np.array([trainingDataIndexes,testDataIndexes])))
                 return True
         #----------------------------------------------------------------------
         def getGeneralAccurace(self):
