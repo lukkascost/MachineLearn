@@ -1,4 +1,5 @@
 # SVM MultiClass for Classify atributes
+ implementation for uses SVM multiclass in OPENCV lib or scikit lib.
 ## One vs One
 
 ## One vs Rest
