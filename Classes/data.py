@@ -2,6 +2,7 @@ import cv2
 import pickle as pk
 import numpy as np
 import copy
+import gzip
 
 class Data(object):
         def __init__(self,nClass, nTestingSamples, samples = 50):

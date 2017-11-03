@@ -86,7 +86,10 @@ from Classes.Extractors.GLCM import GLCM
 
 
 exp = Experiment()
-niterations = 50
+exp = exp.load("file.txt")
+print exp
+print "ok"
+niterations = 1
 
 
 
@@ -109,6 +112,6 @@ for nbits in [5,6,7,8]:
                 results =  svm.predict_all(np.float32(obDataSet.atributes[obData.Testing_indexes]),np.float32(obDataSet.labels[obData.Testing_indexes]))
                 obData.setResultsForClassfier(results, obDataSet.labels[obData.Testing_indexes])        
                 obDataSet.append(obData)
-                print obDataSet
         exp.addDataSet(obDataSet, description="Test for {}bits database: ".format(nbits))
+        exp.save("file.txt")
         
