@@ -1,6 +1,10 @@
 # Data Class
 text
 
+### ```Data.randomTrainingTest()```
+text
+
+
 ### Sample to create a use of DataSet
 text
 
@@ -16,9 +20,6 @@ text
 
 
 ### ```Data_set.getGeneralAccurace()```
-text
-
-### ```Data_set.randomTrainingTest(self,nIteration, ntraining)```
 text
 
 

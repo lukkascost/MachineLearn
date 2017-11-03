@@ -4,7 +4,6 @@ class DataSet(object):
         def __init__(self):
                 self.dataSet = []
                 self.length = 0
-                self.indexSet = None
                 self.sum_confusion_matrix = None
                 self.atributes = None
                 self.labels = None
@@ -32,20 +31,7 @@ class DataSet(object):
                         self.labels =   self.labels[1:]                       
                 self.number_of_samples += 1  
                 return True
-        #----------------------------------------------------------------------
-        def randomTrainingTest(self,nIteration, ntraining):
-                """
-                Parameter nIteration: number of iterations to define training and testing indexes.
-                Parameter ntraining: number total of training data.
-                """
-                allIndexes = np.arange(self.number_of_samples)
-                np.random.shuffle(allIndexes)
-                trainingDataIndexes = allIndexes[:ntraining]
-                testDataIndexes = allIndexes[ntraining:]
-                if self.indexSet == None:
-                        self.indexSet = np.zeros((0,2))
-                self.indexSet = np.vstack((self.indexSet, np.array([trainingDataIndexes,testDataIndexes])))
-                return True
+        
         #----------------------------------------------------------------------
         def getGeneralAccurace(self):
                 """
@@ -58,15 +44,15 @@ class DataSet(object):
         def exportTestingSamples(self, path , index = 0):
                 """
                 """                
-                atributes = self.atributes[self.indexSet[index,1]]
-                labels = self.labels[self.indexSet[index,1]] 
+                atributes = self.atributes[self.dataSet[index].Testing_indexes]
+                labels = self.labels[self.dataSet[index].Testing_indexes] 
                 np.savetxt(path, np.hstack((atributes,labels)), delimiter=",")
         #----------------------------------------------------------------------
         def exportTrainingSamples(self, path , index = 0):
                 """
                 """                
-                atributes = self.atributes[self.indexSet[index,0]]
-                labels = self.labels[self.indexSet[index,0]] 
+                atributes = self.atributes[self.dataSet[index].Training_indexes]
+                labels = self.labels[self.dataSet[index].Training_indexes] 
                 np.savetxt(path, np.hstack((atributes,labels)), delimiter=",")
         
         #----------------------------------------------------------------------        

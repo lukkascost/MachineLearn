@@ -83,4 +83,29 @@ from Classes.Extractors.GLCM import GLCM
                 #print "\n"
         #np.savetxt("GLCM_FILES/{}b.txt.gz".format(nbits),arrayGLCM,delimiter = ",", fmt="%.10e")
         #print "File Generated successful"
-        
+
+
+exp = Experiment()
+niterations = 50
+
+
+
+for nbits in [5,6,7,8]:
+        fname = "../SVM_ISOLADOR/GLCM_FILES/{}b.txt.gz".format(nbits)
+        array = np.loadtxt(fname, delimiter=",")
+        obDataSet = DataSet()
+        for j in range(1,6):
+                ar = array[array[:,-1]==j]
+                np.random.shuffle(ar)
+                ar = ar[:200]
+                for i in ar:
+                        obDataSet.addSampleOfAtt(i)
+        for itIndex in range(niterations):
+                obData = Data(5, 50, samples=200)
+                obData.randomTrainingTest()
+                
+                
+                
+                obDataSet.append(obData)
+        exp.addDataSet(obDataSet, description="Test for {}bits database: ".format(nbits))
+        #print obDataSet
