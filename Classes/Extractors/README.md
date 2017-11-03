@@ -146,6 +146,7 @@ as Result:
    1.50000000e+00  -1.66666667e-01   1.41666667e+00   1.25925926e-02
    1.00000000e+00]
 ```
+## LBP
 
 
 
@@ -155,4 +156,3 @@ as Result:
 * **Lucas Costa** - [lukkascost](https://github.com/lukkascost)
 
 See also the list of [contributors](https://github.com/lukkascost/MachineLearn/contributors) who participated in this project.
-
