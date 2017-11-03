@@ -1,6 +1,10 @@
 # Data Class
 text
 
+### Sample to create a use of DataSet
+text
+
+
 # Data_set Class
 
 ### ```Data_set.append(data, traineIndexes, testIndexes)```
@@ -22,10 +26,16 @@ text
 ### ```Data_set.exportTrainingSamples(path , index = 0)```
 text
 
+### Sample to create a use of DataSet
+text
+
 
 # Experiment Class
 
 ### ```Experiment.addDataSet(self,dataSet, description = "")```
+text
+
+### Sample to create a use of Experiment
 text
 
 
