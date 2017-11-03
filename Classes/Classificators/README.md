@@ -4,7 +4,11 @@
 ## One vs Rest
 
 
-   
+# HOG
+
+
+
+
 ## Authors
 
 * **Lucas Costa** - [lukkascost](https://github.com/lukkascost)
