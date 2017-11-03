@@ -103,9 +103,12 @@ for nbits in [5,6,7,8]:
         for itIndex in range(niterations):
                 obData = Data(5, 50, samples=200)
                 obData.randomTrainingTest()
-                
-                
-                
+                svm = cv2.SVM()
+                obData.params = dict(kernel_type = cv2.SVM_RBF,svm_type = cv2.SVM_C_SVC,gamma=2.0,nu = 0.0,p = 0.0, coef0 = 0)
+                svm.train_auto(np.float32(obDataSet.atributes[obData.Training_indexes]),np.float32(obDataSet.labels[obData.Training_indexes]),None,None,obData.params)
+                results =  svm.predict_all(np.float32(obDataSet.atributes[obData.Testing_indexes]),np.float32(obDataSet.labels[obData.Testing_indexes]))
+                obData.setResultsForClassfier(results, obDataSet.labels[obData.Testing_indexes])        
                 obDataSet.append(obData)
+                print obDataSet
         exp.addDataSet(obDataSet, description="Test for {}bits database: ".format(nbits))
-        #print obDataSet
+        

@@ -11,6 +11,7 @@ class Data(object):
                 self.number_of_testingSamples = nTestingSamples
                 self.Testing_indexes = None
                 self.Training_indexes = None
+                self.params = None
         #----------------------------------------------------------------------
         def randomTrainingTest(self,startClass = 1):
                 """
@@ -18,8 +19,17 @@ class Data(object):
                 """
                 allIndexes = np.arange(self.number_of_classes*(self.number_of_testingSamples+self.number_of_trainingSamples))
                 np.random.shuffle(allIndexes)
-                self.Testing_indexes = allIndexes[:self.number_of_classes * self.number_of_trainingSamples]
-                self.Training_indexes = allIndexes[self.number_of_classes * self.number_of_trainingSamples:]
-                return True        
+                self.Testing_indexes = allIndexes[self.number_of_classes * self.number_of_trainingSamples:]
+                self.Training_indexes = allIndexes[:self.number_of_classes * self.number_of_trainingSamples]
+                return True   
+        #----------------------------------------------------------------------
+        def setResultsForClassfier(self,results, labels):
+                """
+                Parameter results: array with results of classfier.
+                Parameter labels: label for each entry in classfier.
+                """
+                for i, j in enumerate(results):
+                        self.confusion_matrix[int(labels[i,0])-1,int(j[0])-1] += 1
+                
         def __str__(self):
                 return ""
