@@ -7,15 +7,18 @@ text
 
 # Data_set Class
 
-### ```Data_set.append(data, traineIndexes, testIndexes)```
+### ```Data_set.append(data)```
 text
 
 
-### ```Data_set.addSampleOfAtt(att,label)| addSampleOfAtt(att)```
+### ```Data_set.addSampleOfAtt(att)```
 text
 
 
 ### ```Data_set.getGeneralAccurace()```
+text
+
+### ```Data_set.randomTrainingTest(self,nIteration, ntraining)```
 text
 
 
