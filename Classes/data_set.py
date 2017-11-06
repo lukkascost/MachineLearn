@@ -1,7 +1,19 @@
 from data import *
 
 class DataSet(object):
+        """
+        Class implemented by Lucas Costa.
+        https://www.github.com/lukkascost
+        
+        Created in 30/10/2017
+        Last Modify in 06/11/2017
+        
+        contact: lucas.costa@lit.ifce.edu.br
+        """          
         def __init__(self):
+                """
+                Contructor 
+                """
                 self.dataSet = []
                 self.length = 0
                 self.sum_confusion_matrix = None

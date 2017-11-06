@@ -9,7 +9,7 @@ class GLCM:
         https://www.github.com/lukkascost
         
         Created in 30/10/2017
-        Last Modify in 31/10/2017
+        Last Modify in 06/11/2017
         
         contact: lucas.costa@lit.ifce.edu.br
         """
@@ -18,8 +18,9 @@ class GLCM:
         def __init__(self, input_array, number_of_bits):
                 """
                 Generate an square coOccurence Matrix of input_array with shape (2**number_of_bits)
+                Parameter input_array:
+                Parameter number_of_bits:
                 """
-
                 self.coOccurenceMatrix = np.zeros((2**number_of_bits, 2**number_of_bits))
                 self.input_array = input_array
                 self.coOccurenceNormalized = np.zeros((2**number_of_bits, 2**number_of_bits))

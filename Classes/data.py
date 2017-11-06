@@ -5,7 +5,19 @@ import copy
 import gzip
 
 class Data(object):
+        """
+        Class implemented by Lucas Costa.
+        https://www.github.com/lukkascost
+        
+        Created in 30/10/2017
+        Last Modify in 06/11/2017
+        
+        contact: lucas.costa@lit.ifce.edu.br
+        """          
         def __init__(self,nClass, nTestingSamples, samples = 50):
+                """
+                Constructor 
+                """
                 self.confusion_matrix = np.zeros((nClass,nClass))
                 self.number_of_classes = nClass
                 self.number_of_trainingSamples = samples - nTestingSamples
@@ -24,7 +36,7 @@ class Data(object):
                 self.Training_indexes = allIndexes[:self.number_of_classes * self.number_of_trainingSamples]
                 return True   
         #----------------------------------------------------------------------
-        def setResultsForClassfier(self,results, labels):
+        def setResultsFromClassfier(self,results, labels):
                 """
                 Parameter results: array with results of classfier.
                 Parameter labels: label for each entry in classfier.
