@@ -20,6 +20,7 @@ class DataSet(object):
                 self.atributes = None
                 self.labels = None
                 self.number_of_samples = 0    
+                self.normalize_between = None
         #----------------------------------------------------------------------
         def append(self, data):
                 """                """
@@ -66,7 +67,23 @@ class DataSet(object):
                 atributes = self.atributes[self.dataSet[index].Training_indexes]
                 labels = self.labels[self.dataSet[index].Training_indexes] 
                 np.savetxt(path, np.hstack((atributes,labels)), delimiter=",")
-        
+        #----------------------------------------------------------------------
+        def normalizeDataSet(self):
+                """
+                Normalize atributes in self object and saves the values of normalization max and min.
+                """
+                self.normalize_between = np.zeros((len(self.atributes[0]),2))
+                for i in range(len(self.atributes[0])):
+                        self.normalize_between[i,0] = max(self.atributes[:,i])
+                        self.normalize_between[i,1] = min(self.atributes[:,i])              
+                        if self.normalize_between[i,0]-self.normalize_between[i,1] == 0:
+                                self.atributes[:,i] = self.atributes[:,i] * 0.0
+                        else:
+                                self.atributes[:,i] = self.atributes[:,i] - self.normalize_between[i,1]
+                                self.atributes[:,i] = self.atributes[:,i] / (self.normalize_between[i,0] - self.normalize_between[i,1])                            
+                        print self.atributes[:,i]
+                        
+                                       
         #----------------------------------------------------------------------        
         def __str__(self):
                 """
