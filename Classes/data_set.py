@@ -80,9 +80,7 @@ class DataSet(object):
                                 self.atributes[:,i] = self.atributes[:,i] * 0.0
                         else:
                                 self.atributes[:,i] = self.atributes[:,i] - self.normalize_between[i,1]
-                                self.atributes[:,i] = self.atributes[:,i] / (self.normalize_between[i,0] - self.normalize_between[i,1])                            
-                        print self.atributes[:,i]
-                        
+                                self.atributes[:,i] = self.atributes[:,i] / (self.normalize_between[i,0] - self.normalize_between[i,1])                                                    
                                        
         #----------------------------------------------------------------------        
         def __str__(self):
