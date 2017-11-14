@@ -26,7 +26,7 @@ class Data(object):
                 self.Training_indexes = None
                 self.params = None
         #----------------------------------------------------------------------
-        def randomTrainingTest(self,startClass = 1):
+        def randomTrainingTest(self):
                 """
                 Optional Parameter startClass: number of first class, default=1
                 """
@@ -35,6 +35,24 @@ class Data(object):
                 self.Testing_indexes = allIndexes[self.number_of_classes * self.number_of_trainingSamples:]
                 self.Training_indexes = allIndexes[:self.number_of_classes * self.number_of_trainingSamples]
                 return True   
+        #----------------------------------------------------------------------
+        def radndomTrainingTestPerClass(self, startClass=1):
+                """
+                Optional Parameter startClass: number of first class, default=1
+                """
+                self.Testing_indexes = []
+                self.Training_indexes = []                
+                array = np.arange(self.number_of_classes*(self.number_of_testingSamples+ self.number_of_trainingSamples))
+                array = np.split(array, self.number_of_classes)
+                [np.random.shuffle(x) for x in array]
+                for i in array:
+                        self.Testing_indexes = self.Testing_indexes + list(i[:self.number_of_testingSamples])
+                        self.Training_indexes += list(i[self.number_of_testingSamples:])
+                self.Testing_indexes  = np.array(self.Testing_indexes)
+                self.Training_indexes  = np.array(self.Training_indexes)
+                
+                        
+                        
         #----------------------------------------------------------------------
         def setResultsFromClassfier(self,results, labels):
                 """
