@@ -47,7 +47,7 @@ class Data(object):
                 """ """
                 acuraces = np.zeros(self.number_of_classes)
                 for i in range(self.number_of_classes):
-                        acuraces[i] = self.confusion_matrix[i,i]/self.number_of_testingSamples
+                        acuraces[i] = self.confusion_matrix[i,i]/sum(self.confusion_matrix[i,:])
                 return acuraces
         def getAccuraceAllClass(self):
                 return sum(self.getAccuracePerClass())/self.number_of_classes
