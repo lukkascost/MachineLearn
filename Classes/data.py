@@ -43,6 +43,13 @@ class Data(object):
                 """
                 for i, j in enumerate(results):
                         self.confusion_matrix[int(labels[i,0])-1,int(j[0])-1] += 1
-                
+        def getAccuracePerClass(self):
+                """ """
+                acuraces = np.zeros(self.number_of_classes)
+                for i in range(self.number_of_classes):
+                        acuraces[i] = self.confusion_matrix[i,i]/self.number_of_testingSamples
+                return acuraces
+        def getAccuraceAllClass(self):
+                return sum(self.getAccuracePerClass)/self.number_of_classes
         def __str__(self):
                 return ""
