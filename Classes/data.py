@@ -50,6 +50,6 @@ class Data(object):
                         acuraces[i] = self.confusion_matrix[i,i]/self.number_of_testingSamples
                 return acuraces
         def getAccuraceAllClass(self):
-                return sum(self.getAccuracePerClass)/self.number_of_classes
+                return sum(self.getAccuracePerClass())/self.number_of_classes
         def __str__(self):
                 return ""
