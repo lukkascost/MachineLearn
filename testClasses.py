@@ -86,10 +86,8 @@ from Classes.Extractors.GLCM import GLCM
 
 
 exp = Experiment()
-exp = exp.load("file.txt")
-print exp
-print "ok"
-niterations = 1
+#exp = exp.load("file.txt")
+niterations = 3
 
 
 
@@ -103,16 +101,18 @@ for nbits in [5,6,7,8]:
                 ar = ar[:200]
                 for i in ar:
                         obDataSet.addSampleOfAtt(i)
-        obDataSet.normalizeDataSet()
+        #obDataSet.normalizeDataSet()
         for itIndex in range(niterations):
                 obData = Data(5, 50, samples=200)
                 obData.radndomTrainingTestPerClass()
                 svm = cv2.SVM()
                 obData.params = dict(kernel_type = cv2.SVM_RBF,svm_type = cv2.SVM_C_SVC,gamma=2.0,nu = 0.0,p = 0.0, coef0 = 0)
-                svm.train_auto(np.float32(obDataSet.atributes[obData.Training_indexes]),np.float32(obDataSet.labels[obData.Training_indexes]),None,None,obData.params)
+                svm.train(np.float32(obDataSet.atributes[obData.Training_indexes]),np.float32(obDataSet.labels[obData.Training_indexes]),None,None,obData.params)
+                svm.save("asd.txt")
                 results =  svm.predict_all(np.float32(obDataSet.atributes[obData.Testing_indexes]),np.float32(obDataSet.labels[obData.Testing_indexes]))
-                obData.setResultsForClassfier(results, obDataSet.labels[obData.Testing_indexes])        
+                obData.setResultsFromClassfier(results, obDataSet.labels[obData.Testing_indexes])        
                 obDataSet.append(obData)
         exp.addDataSet(obDataSet, description="Test for {}bits database: ".format(nbits))
         exp.save("file.txt")
-        
+        print exp
+print exp

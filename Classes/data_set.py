@@ -6,7 +6,7 @@ class DataSet(object):
         https://www.github.com/lukkascost
         
         Created in 30/10/2017
-        Last Modify in 06/11/2017
+        Last Modify in 16/11/2017
         
         contact: lucas.costa@lit.ifce.edu.br
         """          
@@ -46,13 +46,34 @@ class DataSet(object):
                 return True
         
         #----------------------------------------------------------------------
-        def getGeneralAccurace(self):
+        def getGeneralMetrics(self):
                 """
                 """                
-                generalAcc = 0
-                for i in range(self.sum_confusion_matrix.shape[0]):
-                        generalAcc+= self.sum_confusion_matrix[i,i]/(self.length*self.dataSet[0].number_of_testingSamples)
-                return generalAcc/self.sum_confusion_matrix.shape[0]
+                if self.length == 0: return False
+                confusion_matrix = self.sum_confusion_matrix/self.length
+                
+                VP = confusion_matrix.diagonal()
+        
+                FP = np.sum(confusion_matrix,axis=0)
+                FP = FP - VP
+        
+                FN = np.sum(confusion_matrix,axis=1)
+                FN = FN - VP
+        
+                VN = FP+FN+VP
+                VN = (self.dataSet[0].number_of_testingSamples*self.dataSet[0].number_of_classes)-VN
+        
+                acc = (VP+VN)/(self.dataSet[0].number_of_testingSamples*self.dataSet[0].number_of_classes)
+                acc = np.hstack((acc,sum(acc)/self.dataSet[0].number_of_classes))
+        
+                se = VP / (VP+FN)
+                se = np.hstack((se,sum(se)/self.dataSet[0].number_of_classes))
+        
+                es = VN/(VN+FP)
+                es = np.hstack((es,sum(es)/self.dataSet[0].number_of_classes))
+        
+                return np.array([acc,se,es])
+        
         #----------------------------------------------------------------------
         def exportTestingSamples(self, path , index = 0):
                 """
@@ -85,5 +106,21 @@ class DataSet(object):
         #----------------------------------------------------------------------        
         def __str__(self):
                 """
-                """                
-                return str(self.getGeneralAccurace())
+                """       
+                string  = "#"*30 + " AVERAGE RESULTS "+ "#" *30
+                string += "\n"+ "\t"*3 + "acc\tSe\tEs"
+                for i in range(self.dataSet[0].number_of_classes):
+                        metrics = self.getGeneralMetrics()
+                        string += "\nClass {:02d} metrics: ".format(i+1)
+                        string += "\t{:02.04f}".format(metrics[0][i])
+                        string += "\t{:02.04f}".format(metrics[1][i])
+                        string += "\t{:02.04f}".format(metrics[2][i])
+                string += "\nAll Class metrics: ".format(i+1)
+                string += "\t{:02.04f}".format(metrics[0][-1])
+                string += "\t{:02.04f}".format(metrics[1][-1])
+                string += "\t{:02.04f}\n".format(metrics[2][-1])
+                
+                
+                string  += "#"*77
+                
+                return string 

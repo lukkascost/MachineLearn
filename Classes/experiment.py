@@ -9,7 +9,7 @@ class Experiment(object):
         https://www.github.com/lukkascost
         
         Created in 30/10/2017
-        Last Modify in 06/11/2017
+        Last Modify in 16/11/2017
         
         contact: lucas.costa@lit.ifce.edu.br
         """        
@@ -35,8 +35,8 @@ class Experiment(object):
                 Overwrite the str conversion to print object:                """
                 result = ""
                 for i,j in enumerate(self.experimentResults):
-                        result += self.experimentDescript[i] + "\n"
-                        result += "\t" + str(j) + "\n"
+                        result += "*"*40+self.experimentDescript[i] + "*"*40 + "\n"
+                        result += str(j) + "\n"
                         
                 return result
         

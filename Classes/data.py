@@ -10,7 +10,7 @@ class Data(object):
         https://www.github.com/lukkascost
         
         Created in 30/10/2017
-        Last Modify in 06/11/2017
+        Last Modify in 16/11/2017
         
         contact: lucas.costa@lit.ifce.edu.br
         """          
@@ -68,6 +68,46 @@ class Data(object):
                         acuraces[i] = self.confusion_matrix[i,i]/sum(self.confusion_matrix[i,:])
                 return acuraces
         def getAccuraceAllClass(self):
+                """"""
                 return sum(self.getAccuracePerClass())/self.number_of_classes
+        
+        #----------------------------------------------------------------------
+        def getMetrics(self):
+                """
+                
+                """
+                VP = self.confusion_matrix.diagonal()
+                
+                FP = np.sum(self.confusion_matrix,axis=0)
+                FP = FP - VP
+                
+                FN = np.sum(self.confusion_matrix,axis=1)
+                FN = FN - VP
+                
+                VN = FP+FN+VP
+                VN = (self.number_of_testingSamples*self.number_of_classes)-VN
+                
+                acc = (VP+VN)/(self.number_of_testingSamples*self.number_of_classes)
+                acc = np.hstack((acc,sum(acc)/self.number_of_classes))
+                
+                se = VP / (VP+FN)
+                se = np.hstack((se,sum(se)/self.number_of_classes))
+                
+                es = VN/(VN+FP)
+                es = np.hstack((es,sum(es)/self.number_of_classes))
+                
+                return np.array([acc,se,es])
         def __str__(self):
-                return ""
+                string = "\n"+ "\t"*3 + "acc\tSe\tEs"
+                for i in range(self.number_of_classes):
+                        metrics = self.getMetrics()
+                        string += "\nClass {:02d} metrics: ".format(i+1)
+                        string += "\t{:02.04f}".format(metrics[0][i])
+                        string += "\t{:02.04f}".format(metrics[1][i])
+                        string += "\t{:02.04f}".format(metrics[2][i])
+                string += "\nAll Class metrics: ".format(i+1)
+                string += "\t{:02.04f}".format(metrics[0][-1])
+                string += "\t{:02.04f}".format(metrics[1][-1])
+                string += "\t{:02.04f}".format(metrics[2][-1])
+                
+                return string
