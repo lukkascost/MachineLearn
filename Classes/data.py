@@ -16,7 +16,9 @@ class Data(object):
         """          
         def __init__(self,nClass, nTestingSamples, samples = 50):
                 """
-                Constructor 
+                Parameter nClass: number of classes to be classify.
+                Parameter nTestingSamples: number of samples for test in each class.
+                Optional Parameter samples: number of samples for each class, default 50.
                 """
                 self.confusion_matrix = np.zeros((nClass,nClass))
                 self.number_of_classes = nClass
@@ -28,7 +30,7 @@ class Data(object):
         #----------------------------------------------------------------------
         def randomTrainingTest(self):
                 """
-                Optional Parameter startClass: number of first class, default=1
+                
                 """
                 allIndexes = np.arange(self.number_of_classes*(self.number_of_testingSamples+self.number_of_trainingSamples))
                 np.random.shuffle(allIndexes)
@@ -74,7 +76,7 @@ class Data(object):
         #----------------------------------------------------------------------
         def getMetrics(self):
                 """
-                
+                returns the metrics of accuracy, sensitivity and specificity of classifier.
                 """
                 VP = self.confusion_matrix.diagonal()
                 
