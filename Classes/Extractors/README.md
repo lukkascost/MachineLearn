@@ -99,7 +99,7 @@ the attributes descriptions are:
 
 24 -Inertia
 
-equations in paper: **Reducing costs of embedded image classfier** - [Paper](https://github.com/lukkascost)
+equations in paper: **Reducing Computational Costs of an Embedded Classifier to Determine Leather Quality** - [Paper](http://ieeexplore.ieee.org/document/8116582/)
 
 
 sample of use:
