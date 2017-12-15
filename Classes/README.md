@@ -4,8 +4,17 @@ text
 ### ```Data.randomTrainingTest()```
 text
 
+### ```Data.radndomTrainingTestPerClass()```
+text
 
-### Sample to create a use of DataSet
+### ```Data.setResultsFromClassfier()```
+text
+
+### ```Data.getMetrics()```
+text
+
+
+### Sample to create a use of Data Class
 text
 
 

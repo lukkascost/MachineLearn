@@ -30,7 +30,8 @@ class Data(object):
         #----------------------------------------------------------------------
         def randomTrainingTest(self):
                 """
-                
+                Set in self object the training and testing indexies of atributes list.
+                Chooses the sets without a specific number of samples of each class.
                 """
                 allIndexes = np.arange(self.number_of_classes*(self.number_of_testingSamples+self.number_of_trainingSamples))
                 np.random.shuffle(allIndexes)
@@ -40,6 +41,8 @@ class Data(object):
         #----------------------------------------------------------------------
         def radndomTrainingTestPerClass(self, startClass=1):
                 """
+                Set in self object the training and testing indexies of atributes list.
+                Chooses sets with a specific number of samples from each class.
                 Optional Parameter startClass: number of first class, default=1
                 """
                 self.Testing_indexes = []
@@ -53,8 +56,6 @@ class Data(object):
                 self.Testing_indexes  = np.array(self.Testing_indexes)
                 self.Training_indexes  = np.array(self.Training_indexes)
                 
-                        
-                        
         #----------------------------------------------------------------------
         def setResultsFromClassfier(self,results, labels):
                 """
@@ -63,16 +64,7 @@ class Data(object):
                 """
                 for i, j in enumerate(results):
                         self.confusion_matrix[int(labels[i,0])-1,int(j[0])-1] += 1
-        def getAccuracePerClass(self):
-                """ """
-                acuraces = np.zeros(self.number_of_classes)
-                for i in range(self.number_of_classes):
-                        acuraces[i] = self.confusion_matrix[i,i]/sum(self.confusion_matrix[i,:])
-                return acuraces
-        def getAccuraceAllClass(self):
-                """"""
-                return sum(self.getAccuracePerClass())/self.number_of_classes
-        
+
         #----------------------------------------------------------------------
         def getMetrics(self):
                 """
