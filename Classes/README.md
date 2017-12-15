@@ -2,7 +2,9 @@
 text
 
 ### ```Data.randomTrainingTest()```
-text
+Set in self object the training and testing indexies of atributes list.
+Chooses the sets without a specific number of samples of each class, that is the number of samples of each class is random. sums class can`be more samples and others less.
+
 
 ### ```Data.radndomTrainingTestPerClass()```
 text
