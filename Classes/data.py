@@ -10,7 +10,7 @@ class Data(object):
         https://www.github.com/lukkascost
         
         Created in 30/10/2017
-        Last Modify in 16/11/2017
+        Last Modify in 15/12/2017
         
         contact: lucas.costa@lit.ifce.edu.br
         """          
