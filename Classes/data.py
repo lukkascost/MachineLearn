@@ -39,7 +39,7 @@ class Data(object):
                 self.Training_indexes = allIndexes[:self.number_of_classes * self.number_of_trainingSamples]
                 return True   
         #----------------------------------------------------------------------
-        def radndomTrainingTestPerClass(self, startClass=1):
+        def randomTrainingTestPerClass(self, startClass=1):
                 """
                 Set in self object the training and testing indexies of atributes list.
                 Chooses sets with a specific number of samples from each class.
