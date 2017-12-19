@@ -19,6 +19,7 @@ class DataSet(object):
                 self.sum_confusion_matrix = None
                 self.atributes = None
                 self.labels = None
+                self.labelsNames = []
                 self.number_of_samples = 0    
                 self.normalize_between = None
         #----------------------------------------------------------------------
@@ -38,11 +39,18 @@ class DataSet(object):
                         self.atributes = np.zeros(att[:-1].shape)
                         self.labels = np.zeros(att[-1].shape)                
                 self.atributes = np.vstack((self.atributes,att[:-1]))
-                self.labels = np.vstack((self.labels,att[-1]))
+                if (att[-1] in  self.labelsNames):
+                        self.labels = np.vstack((self.labels,self.labelsNames.index(att[-1])))
+                else:
+                        self.labelsNames.append(att[-1])
+                        self.labels = np.vstack((self.labels,self.labelsNames.index(att[-1])))
+                        
                 if self.number_of_samples == 0:
                         self.atributes = self.atributes[1:]
-                        self.labels =   self.labels[1:]                       
-                self.number_of_samples += 1  
+                        self.labels =   self.labels[1:]    
+                        
+                self.number_of_samples += 1 
+                
                 return True
         
         #----------------------------------------------------------------------
@@ -107,20 +115,20 @@ class DataSet(object):
         def __str__(self):
                 """
                 """       
-                string  = "#"*30 + " AVERAGE RESULTS "+ "#" *30
-                string += "\n"+ "\t"*3 + "acc\tSe\tEs"
+                string  = "{:#^80}".format(" AVERAGE RESULTS ")
+                string += "\n {:^20}\t{:^6}\t{:^6}\t{:^6}".format("","acc","Se","Es")
                 for i in range(self.dataSet[0].number_of_classes):
                         metrics = self.getGeneralMetrics()
-                        string += "\nClass {:02d} metrics: ".format(i+1)
+                        string += "\n{:^20}: ".format(self.labelsNames[i])
                         string += "\t{:02.04f}".format(metrics[0][i])
                         string += "\t{:02.04f}".format(metrics[1][i])
                         string += "\t{:02.04f}".format(metrics[2][i])
-                string += "\nAll Class metrics: ".format(i+1)
+                string += "\n{:^20}:".format("All Class")
                 string += "\t{:02.04f}".format(metrics[0][-1])
                 string += "\t{:02.04f}".format(metrics[1][-1])
                 string += "\t{:02.04f}\n".format(metrics[2][-1])
                 
                 
-                string  += "#"*77
+                string  += "#"*80
                 
                 return string 

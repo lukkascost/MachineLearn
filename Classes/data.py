@@ -39,11 +39,10 @@ class Data(object):
                 self.Training_indexes = allIndexes[:self.number_of_classes * self.number_of_trainingSamples]
                 return True   
         #----------------------------------------------------------------------
-        def randomTrainingTestPerClass(self, startClass=1):
+        def randomTrainingTestPerClass(self):
                 """
                 Set in self object the training and testing indexies of atributes list.
                 Chooses sets with a specific number of samples from each class.
-                Optional Parameter startClass: number of first class, default=1
                 """
                 self.Testing_indexes = []
                 self.Training_indexes = []                
@@ -63,7 +62,7 @@ class Data(object):
                 Parameter labels: label for each entry in classfier.
                 """
                 for i, j in enumerate(results):
-                        self.confusion_matrix[int(labels[i,0])-1,int(j[0])-1] += 1
+                        self.confusion_matrix[int(labels[i,0]),int(j[0])] += 1
 
         #----------------------------------------------------------------------
         def getMetrics(self):
@@ -95,7 +94,7 @@ class Data(object):
                 string = "\n"+ "\t"*3 + "acc\tSe\tEs"
                 for i in range(self.number_of_classes):
                         metrics = self.getMetrics()
-                        string += "\nClass {:02d} metrics: ".format(i+1)
+                        string += "\nClass {} metrics: ".format(i+1)
                         string += "\t{:02.04f}".format(metrics[0][i])
                         string += "\t{:02.04f}".format(metrics[1][i])
                         string += "\t{:02.04f}".format(metrics[2][i])
