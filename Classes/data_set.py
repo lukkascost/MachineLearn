@@ -6,7 +6,7 @@ class DataSet(object):
         https://www.github.com/lukkascost
         
         Created in 30/10/2017
-        Last Modify in 16/11/2017
+        Last Modify in 19/12/2017
         
         contact: lucas.costa@lit.ifce.edu.br
         """          
