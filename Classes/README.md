@@ -39,13 +39,6 @@ text
 text
 
 
-### ```Data_set.exportTestingSamples(path , index = 0)```
-text
-
-
-### ```Data_set.exportTrainingSamples(path , index = 0)```
-text
-
 ### Sample to create a use of DataSet
 text
 
@@ -54,6 +47,13 @@ text
 
 ### ```Experiment.addDataSet(self,dataSet, description = "")```
 text
+
+### ```Experiment.save(self,filename, protocol = 0)```
+text
+
+### ```Experiment.load(self,filename)```
+text
+
 
 ### Sample to create a use of Experiment
 text

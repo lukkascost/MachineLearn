@@ -13,6 +13,7 @@ class DataSet(object):
         def __init__(self):
                 """
                 Contructor 
+                initializes the variables with zeros or None.
                 """
                 self.dataSet = []
                 self.length = 0
@@ -24,7 +25,9 @@ class DataSet(object):
                 self.normalize_between = None
         #----------------------------------------------------------------------
         def append(self, data):
-                """                """
+                """
+                Parameter data: object of class type Data, with results and confusion matrix complete.
+                adds on self object array the values of complete data object.                """
                 if self.length == 0:
                         self.sum_confusion_matrix = np.zeros(data.confusion_matrix.shape)
                 self.sum_confusion_matrix = np.add(self.sum_confusion_matrix,data.confusion_matrix)
@@ -34,7 +37,11 @@ class DataSet(object):
         #----------------------------------------------------------------------
         def addSampleOfAtt(self,att):
                 """
+                Parameter att: array with attributes and label on last position.
+                appends the attribute to object.
+                the variable must be composed by a sequence of attributes and the last value is a label of a class which attribute belongs.
                 """                
+                
                 if self.number_of_samples == 0:
                         self.atributes = np.zeros(att[:-1].shape)
                         self.labels = np.zeros(att[-1].shape)                
@@ -56,6 +63,8 @@ class DataSet(object):
         #----------------------------------------------------------------------
         def getGeneralMetrics(self):
                 """
+                gets general metrics for results on confusion matrix, related to all the DATA append on self object.
+                returns accurace, sensitivity and specificity.
                 """                
                 if self.length == 0: return False
                 confusion_matrix = self.sum_confusion_matrix/self.length
@@ -82,21 +91,6 @@ class DataSet(object):
         
                 return np.array([acc,se,es])
         
-        #----------------------------------------------------------------------
-        def exportTestingSamples(self, path , index = 0):
-                """
-                """                
-                atributes = self.atributes[self.dataSet[index].Testing_indexes]
-                labels = self.labels[self.dataSet[index].Testing_indexes] 
-                np.savetxt(path, np.hstack((atributes,labels)), delimiter=",")
-        #----------------------------------------------------------------------
-        def exportTrainingSamples(self, path , index = 0):
-                """
-                """                
-                atributes = self.atributes[self.dataSet[index].Training_indexes]
-                labels = self.labels[self.dataSet[index].Training_indexes] 
-                np.savetxt(path, np.hstack((atributes,labels)), delimiter=",")
-        #----------------------------------------------------------------------
         def normalizeDataSet(self):
                 """
                 Normalize atributes in self object and saves the values of normalization max and min.
