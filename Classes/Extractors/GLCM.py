@@ -9,13 +9,13 @@ class GLCM:
         https://www.github.com/lukkascost
         
         Created in 30/10/2017
-        Last Modify in 06/11/2017
+        Last Modify in 26/12/2017
         
         contact: lucas.costa@lit.ifce.edu.br
         """
 
         #----------------------------------------------------------------------
-        def __init__(self, input_array, number_of_bits):
+        def __init__(self, input_array, number_of_bits,number_of_Attributes = 24):
                 """
                 Generate an square coOccurence Matrix of input_array with shape (2**number_of_bits)
                 Parameter input_array:
@@ -24,7 +24,8 @@ class GLCM:
                 self.coOccurenceMatrix = np.zeros((2**number_of_bits, 2**number_of_bits))
                 self.input_array = input_array
                 self.coOccurenceNormalized = np.zeros((2**number_of_bits, 2**number_of_bits))
-                self.attributes = np.zeros(25)
+                self.num_att = number_of_Attributes
+                self.attributes = np.zeros(number_of_Attributes+1)
                 
         def generateCoOccurenceHorizontal(self, step = 1,orientation = True ):
                 """
@@ -47,7 +48,13 @@ class GLCM:
                 """
                 self.coOccurenceNormalized = init + ((endValue*self.coOccurenceMatrix)/(self.input_array.shape[0]*(self.input_array.shape[1] -1))  ) 
                 
-                                
+        def setAtributesValues(self,glcm_att):
+                "Parameter glcm_att: Array with atributes"
+                self.attributes = glcm_att
+                self.num_att = len(glcm_att)
+                
+                
+                
         def calculateAttributes(self):  
                 """
                 Calculate the 24 attributes of GLCM based on co Occurence matrix,
