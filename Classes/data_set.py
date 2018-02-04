@@ -90,6 +90,8 @@ class DataSet(object):
                 F1 = F1/(VPP+se)
                 
                 se = np.hstack((se,sum(se)/self.dataSet[0].number_of_classes))
+                F1 = np.hstack((F1,sum(F1)/self.dataSet[0].number_of_classes))
+                
         
                 es = VN/(VN+FP)
                 es = np.hstack((es,sum(es)/self.dataSet[0].number_of_classes))

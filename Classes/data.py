@@ -91,6 +91,8 @@ class Data(object):
                 F1 = F1/(VPP+se)
                 
                 se = np.hstack((se,sum(se)/self.number_of_classes))
+                F1 = np.hstack((F1,sum(F1)/self.number_of_classes))
+                
                 
                 es = VN/(VN+FP)
                 es = np.hstack((es,sum(es)/self.number_of_classes))
