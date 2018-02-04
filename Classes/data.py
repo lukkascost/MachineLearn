@@ -80,27 +80,35 @@ class Data(object):
                 VN = FP+FN+VP
                 VN = (self.number_of_testingSamples*self.number_of_classes)-VN
                 
+        
+                VPP = VP/(VP+FP)
+                
                 acc = (VP+VN)/(self.number_of_testingSamples*self.number_of_classes)
                 acc = np.hstack((acc,sum(acc)/self.number_of_classes))
-                
+                        
                 se = VP / (VP+FN)
+                F1 = 2*VPP*se
+                F1 = F1/(VPP+se)
+                
                 se = np.hstack((se,sum(se)/self.number_of_classes))
                 
                 es = VN/(VN+FP)
                 es = np.hstack((es,sum(es)/self.number_of_classes))
                 
-                return np.array([acc,se,es])
+                return np.array([acc,se,es,F1])
         def __str__(self):
-                string = "\n"+ "\t"*3 + "acc\tSe\tEs"
+                string = "\n"+ "\t"*3 + "acc\tSe\tEs\tF1"
                 for i in range(self.number_of_classes):
                         metrics = self.getMetrics()
                         string += "\nClass {} metrics: ".format(i+1)
                         string += "\t{:02.04f}".format(metrics[0][i])
                         string += "\t{:02.04f}".format(metrics[1][i])
                         string += "\t{:02.04f}".format(metrics[2][i])
+                        string += "\t{:02.04f}".format(metrics[3][i])                        
                 string += "\nAll Class metrics: ".format(i+1)
                 string += "\t{:02.04f}".format(metrics[0][-1])
                 string += "\t{:02.04f}".format(metrics[1][-1])
                 string += "\t{:02.04f}".format(metrics[2][-1])
+                string += "\t{:02.04f}".format(metrics[3][-1])                
                 
                 return string

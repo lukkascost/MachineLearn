@@ -80,8 +80,7 @@ class DataSet(object):
                 VN = FP+FN+VP
                 VN = (self.dataSet[0].number_of_testingSamples*self.dataSet[0].number_of_classes)-VN
                 
-                VPP = VP
-                VPP = VPP/(VP+VN)
+                VPP = VP/(VP+FP)
                 
                 acc = (VP+VN)/(self.dataSet[0].number_of_testingSamples*self.dataSet[0].number_of_classes)
                 acc = np.hstack((acc,sum(acc)/self.dataSet[0].number_of_classes))
