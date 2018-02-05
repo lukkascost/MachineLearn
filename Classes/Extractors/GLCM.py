@@ -118,6 +118,10 @@ class GLCM:
                 self.attributes[16]  = self.attributes[16] /2
                 self.attributes[22] /= 2
                 self.attributes[24] /= pow(pow(gray, 2)-1,2)
+                
+                Q = np.zeros((gray,gray))
+
+                
                 for i in range(gray*2-1):
                         self.attributes[6]  += px_plus_y[i]
                         self.attributes[8]  += px_plus_y[i]*np.log10(px_plus_y[i]+ 1e-30) 
@@ -132,6 +136,10 @@ class GLCM:
                                 self.attributes[18] += pow(i+j-(2*meanall),2)*self.coOccurenceNormalized[i,j]
                                 self.attributes[19] += self.coOccurenceNormalized[i,j] * pow(i+j-np.mean(px)-np.mean(py),3)
                                 self.attributes[20] += self.coOccurenceNormalized[i,j] * pow(i+j-np.mean(px)-np.mean(py),4)
+                                for k in range(gray):
+                                        Q[i,j] = self.coOccurenceNormalized[i,k]*self.coOccurenceNormalized[j,k]
+                                        if not(Q[i,j] == 0 ):
+                                                Q[i,j] = Q[i,j]/(px[i]*py[k])
                                 
                 self.attributes[8]  *= -1
                 self.attributes[9]  *= -1
@@ -152,6 +160,9 @@ class GLCM:
                 
                 for i in range(gray*2-1):
                         self.attributes[7]  += pow(i-self.attributes[8] ,2)*px_plus_y[i]
+                        
+                self.attributes[14] = np.linalg.eig(Q)[0][1]
+                self.attributes[14] = pow(self.attributes[14],1/2)
                 self.attributes = self.attributes[1:]
                 
         def exportToClassfier(self, label):
