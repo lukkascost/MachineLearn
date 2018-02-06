@@ -105,7 +105,7 @@ class DataSet(object):
                 string += "\t{:02.04f}\n".format(metrics[3][-1])
                 string  += "#"*80 
                 
-                string += "{:#^80}".format(" STD RESULTS ")
+                string += "\n{:#^80}".format(" STD RESULTS ")
                 string += "\n {:^20}\t{:^6}\t{:^6}\t{:^6}\t{:^6}".format("","acc","Se","Es","F1")
                 for i in range(self.dataSet[0].number_of_classes):
                         metrics = self.getGeneralMetrics()[1]
