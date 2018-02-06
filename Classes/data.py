@@ -10,7 +10,7 @@ class Data(object):
         https://www.github.com/lukkascost
         
         Created in 30/10/2017
-        Last Modify in 15/12/2017
+        Last Modify in 06/02/2018
         
         contact: lucas.costa@lit.ifce.edu.br
         """          
@@ -28,6 +28,22 @@ class Data(object):
                 self.Training_indexes = None
                 self.params = None
         #----------------------------------------------------------------------
+        def randomTrainingTestByPercent(self, quantity_per_class,percentTrain):
+                """
+                Set in self object the training and testing indexies of atributes list.
+                Chooses the sets with a specific percent of number of samples of each class.
+                """
+                self.Testing_indexes = []
+                self.Training_indexes = []  
+                array = np.arange(np.sum(quantity_per_class))
+                array = np.split(array, quantity_per_class[:-1])
+                [np.random.shuffle(x) for x in array]
+                for i in array:
+                        self.Training_indexes += list(i[:int(len(i)*percentTrain)])
+                        self.Testing_indexes += list(i[int(len(i)*percentTrain):])
+                self.Testing_indexes  = np.array(self.Testing_indexes)
+                self.Training_indexes  = np.array(self.Training_indexes)                
+        
         def randomTrainingTest(self):
                 """
                 Set in self object the training and testing indexies of atributes list.
@@ -54,7 +70,6 @@ class Data(object):
                         self.Training_indexes += list(i[self.number_of_testingSamples:])
                 self.Testing_indexes  = np.array(self.Testing_indexes)
                 self.Training_indexes  = np.array(self.Training_indexes)
-                
         #----------------------------------------------------------------------
         def setResultsFromClassfier(self,results, labels):
                 """
