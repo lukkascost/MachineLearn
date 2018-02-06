@@ -170,7 +170,7 @@ class GLCM:
                 Export extractor attributes in a numpy array with a label on last position.
                 Parameter label: it's a label to which each attributes belong.
                 """
-                returnable = np.zeros(self.num_att+1)
+                returnable = np.full((self.num_att+1), "", dtype=object)
                 returnable[:-1] = self.attributes
                 returnable[-1] = label
                 return returnable

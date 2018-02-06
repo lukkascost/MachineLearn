@@ -36,20 +36,19 @@ from Classes.Extractors.GLCM import GLCM
         #experimento.addDataSet(oDataSet, description="Dataset do M={:d}:".format(percent))
 #print experimento
 
-#entrada = [[2,1,3,0],[0,1,1,3],[1,3,1,2],[0,1,0,2]]
+entrada = [[2,1,3,0],[0,1,1,3],[1,3,1,2],[0,1,0,2]]
 
-#np_entrada  = np.array(entrada)
+np_entrada  = np.array(entrada)
 
-#print np_entrada
-#print np.vstack((np_entrada,np_entrada[0]))
+print np_entrada
+print np.vstack((np_entrada,np_entrada[0]))
 
 
-#gl = GLCM(np_entrada, 2)
+gl = GLCM(np_entrada, 2)
 
-#gl.generateCoOccurenceHorizontal()
-#gl.normalizeCoOccurence()
-#gl.calculateAttributes()
-#print(gl.exportToClassfier(1.0))
+gl.generateCoOccurenceHorizontal()
+gl.normalizeCoOccurence()
+gl.calculateAttributes()
 
 
 
@@ -118,27 +117,27 @@ from Classes.Extractors.GLCM import GLCM
         #exp.save("file.txt")
         #print exp
 #print exp
-labelNames = [""]
+#labelNames = [""]
 
-oDataSet = DataSet()
-oDataSet.addSampleOfAtt(np.array([1.1,1,1,1,1,1,'First_Class']))
-oDataSet.addSampleOfAtt(np.array([2.1,2,2,2,2,2,'Second_Class']))
-oDataSet.addSampleOfAtt(np.array([1.1,1,1,1,1,1,'First_Class']))
-oDataSet.addSampleOfAtt(np.array([2.1,2,2,2,2,2,'Second_Class']))
-oDataSet.addSampleOfAtt(np.array([1.1,1,1,1,1,1,'First_Class']))
-oDataSet.addSampleOfAtt(np.array([2.1,2,2,2,2,2,'Second_Class']))
-oDataSet.addSampleOfAtt(np.array([1.1,1,1,1,1,1,'First_Class']))
-oDataSet.addSampleOfAtt(np.array([2.1,2,2,2,2,2,'Second_Class']))
+#oDataSet = DataSet()
+#oDataSet.addSampleOfAtt(np.array([1.1,1,1,1,1,1,'First_Class']))
+#oDataSet.addSampleOfAtt(np.array([2.1,2,2,2,2,2,'Second_Class']))
+#oDataSet.addSampleOfAtt(np.array([1.1,1,1,1,1,1,'First_Class']))
+#oDataSet.addSampleOfAtt(np.array([2.1,2,2,2,2,2,'Second_Class']))
+#oDataSet.addSampleOfAtt(np.array([1.1,1,1,1,1,1,'First_Class']))
+#oDataSet.addSampleOfAtt(np.array([2.1,2,2,2,2,2,'Second_Class']))
+#oDataSet.addSampleOfAtt(np.array([1.1,1,1,1,1,1,'First_Class']))
+#oDataSet.addSampleOfAtt(np.array([2.1,2,2,2,2,2,'Second_Class']))
 
-oData = Data(2, 1, samples=4)
-oData.randomTrainingTestPerClass()
+#oData = Data(2, 1, samples=4)
+#oData.randomTrainingTestPerClass()
 
-svm = cv2.SVM()
-oData.params = dict(kernel_type = cv2.SVM_RBF,svm_type = cv2.SVM_C_SVC,gamma=2.0,nu = 0.0,p = 0.0, coef0 = 0)
+#svm = cv2.SVM()
+#oData.params = dict(kernel_type = cv2.SVM_RBF,svm_type = cv2.SVM_C_SVC,gamma=2.0,nu = 0.0,p = 0.0, coef0 = 0)
 
-svm.train(np.float32(oDataSet.atributes[oData.Training_indexes]),np.float32(oDataSet.labels[oData.Training_indexes]),None,None,oData.params)
+#svm.train(np.float32(oDataSet.atributes[oData.Training_indexes]),np.float32(oDataSet.labels[oData.Training_indexes]),None,None,oData.params)
 
-results = svm.predict_all(np.float32(oDataSet.atributes[oData.Testing_indexes]))
-oData.setResultsFromClassfier(results, oDataSet.labels[oData.Testing_indexes] )
-oDataSet.append(oData)
-print oDataSet
+#results = svm.predict_all(np.float32(oDataSet.atributes[oData.Testing_indexes]))
+#oData.setResultsFromClassfier(results, oDataSet.labels[oData.Testing_indexes] )
+#oDataSet.append(oData)
+#print oDataSet
