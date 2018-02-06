@@ -44,7 +44,7 @@ class DataSet(object):
                 
                 if self.number_of_samples == 0:
                         self.atributes = np.zeros(att[:-1].shape)
-                        self.labels = np.zeros(att[-1].shape)                
+                        self.labels = np.zeros(1)                
                 self.atributes = np.vstack((self.atributes,att[:-1]))
                 if (att[-1] in  self.labelsNames):
                         self.labels = np.vstack((self.labels,self.labelsNames.index(att[-1])))
