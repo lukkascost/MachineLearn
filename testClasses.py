@@ -84,12 +84,6 @@ from Classes.Extractors.GLCM import GLCM
         #print "File Generated successful"
 
 
-#exp = Experiment()
-##exp = exp.load("file.txt")
-#niterations = 3
-
-
-
 #for nbits in [5,6,7,8]:
         #fname = "../SVM_ISOLADOR/GLCM_FILES/{}b.txt.gz".format(nbits)
         #array = np.loadtxt(fname, delimiter=",")
@@ -119,25 +113,25 @@ from Classes.Extractors.GLCM import GLCM
 #print exp
 #labelNames = [""]
 
-oDataSet = DataSet()
-oDataSet.addSampleOfAtt(np.array([1.1,1,1,1,1,1,'First_Class']))
-oDataSet.addSampleOfAtt(np.array([2.1,2,2,2,2,2,'Second_Class']))
-oDataSet.addSampleOfAtt(np.array([1.1,1,1,1,1,1,'First_Class']))
-oDataSet.addSampleOfAtt(np.array([2.1,2,2,2,2,2,'Second_Class']))
-oDataSet.addSampleOfAtt(np.array([1.1,1,1,1,1,1,'First_Class']))
-oDataSet.addSampleOfAtt(np.array([2.1,2,2,2,2,2,'Second_Class']))
-oDataSet.addSampleOfAtt(np.array([1.1,1,1,1,1,1,'First_Class']))
-oDataSet.addSampleOfAtt(np.array([2.1,2,2,2,2,2,'Second_Class']))
+#oDataSet = DataSet()
+#oDataSet.addSampleOfAtt(np.array([1.1,1,1,1,1,1,'First_Class']))
+#oDataSet.addSampleOfAtt(np.array([2.1,2,2,2,2,2,'Second_Class']))
+#oDataSet.addSampleOfAtt(np.array([1.1,1,1,1,1,1,'First_Class']))
+#oDataSet.addSampleOfAtt(np.array([2.1,2,2,2,2,2,'Second_Class']))
+#oDataSet.addSampleOfAtt(np.array([1.1,1,1,1,1,1,'First_Class']))
+#oDataSet.addSampleOfAtt(np.array([2.1,2,2,2,2,2,'Second_Class']))
+#oDataSet.addSampleOfAtt(np.array([1.1,1,1,1,1,1,'First_Class']))
+#oDataSet.addSampleOfAtt(np.array([2.1,2,2,2,2,2,'Second_Class']))
 
-oData = Data(2, 2, samples=4)
-oData.randomTrainingTestPerClass()
+#oData = Data(2, 2, samples=4)
+#oData.randomTrainingTestPerClass()
 
-svm = cv2.SVM()
-oData.params = dict(kernel_type = cv2.SVM_RBF,svm_type = cv2.SVM_C_SVC,gamma=2.0,nu = 0.0,p = 0.0, coef0 = 0)
+#svm = cv2.SVM()
+#oData.params = dict(kernel_type = cv2.SVM_RBF,svm_type = cv2.SVM_C_SVC,gamma=2.0,nu = 0.0,p = 0.0, coef0 = 0)
 
-svm.train(np.float32(oDataSet.atributes[oData.Training_indexes]),np.float32(oDataSet.labels[oData.Training_indexes]),None,None,oData.params)
+#svm.train(np.float32(oDataSet.atributes[oData.Training_indexes]),np.float32(oDataSet.labels[oData.Training_indexes]),None,None,oData.params)
 
-results = svm.predict_all(np.float32(oDataSet.atributes[oData.Testing_indexes]))
-oData.setResultsFromClassfier(results, oDataSet.labels[oData.Testing_indexes] )
-oDataSet.append(oData)
-print oDataSet
+#results = svm.predict_all(np.float32(oDataSet.atributes[oData.Testing_indexes]))
+#oData.setResultsFromClassfier(results, oDataSet.labels[oData.Testing_indexes] )
+#oDataSet.append(oData)
+#print oDataSet
