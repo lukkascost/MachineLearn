@@ -67,6 +67,9 @@ class DataSet(object):
                 returns accurace, sensitivity and specificity.
                 """                
                 if self.length == 0: return False
+                
+                metrics =  np.array([i.getMetrics() for i  in self.dataSet])
+                print metrics.shape
                 confusion_matrix = self.sum_confusion_matrix/self.length
                 
                 VP = confusion_matrix.diagonal()
@@ -130,9 +133,6 @@ class DataSet(object):
                 string += "\t{:02.04f}".format(metrics[1][-1])
                 string += "\t{:02.04f}".format(metrics[2][-1])
                 string += "\t{:02.04f}\n".format(metrics[3][-1])
-                
-                
-                
                 string  += "#"*80
                 
                 return string 
