@@ -3,6 +3,8 @@ import pickle as pk
 import numpy as np
 import copy
 import gzip
+import warnings
+warnings.filterwarnings("ignore", category=RuntimeWarning) 
 
 class Data(object):
         """
@@ -10,7 +12,7 @@ class Data(object):
         https://www.github.com/lukkascost
         
         Created in 30/10/2017
-        Last Modify in 06/02/2018
+        Last Modify in 07/02/2018
         
         contact: lucas.costa@lit.ifce.edu.br
         """          
@@ -36,6 +38,9 @@ class Data(object):
                 self.Testing_indexes = []
                 self.Training_indexes = []  
                 array = np.arange(np.sum(quantity_per_class))
+                
+                for i,j in enumerate(quantity_per_class[:-1],start=1):
+                        quantity_per_class[i] += j
                 array = np.split(array, quantity_per_class[:-1])
                 [np.random.shuffle(x) for x in array]
                 for i in array:
@@ -95,8 +100,10 @@ class Data(object):
                 VN = FP+FN+VP
                 VN = (np.sum(self.confusion_matrix))-VN
                 
-        
+                        
                 VPP = VP/(VP+FP)
+                VPP[np.isnan(VPP)] = 0.0
+                
                 
                 acc = (VP+VN)/(np.sum(self.confusion_matrix))
                 acc = np.hstack((acc,sum(acc)/self.number_of_classes))
@@ -104,6 +111,8 @@ class Data(object):
                 se = VP / (VP+FN)
                 F1 = 2*VPP*se
                 F1 = F1/(VPP+se)
+                F1[np.isnan(F1)] = 0.0
+                
                 
                 se = np.hstack((se,sum(se)/self.number_of_classes))
                 F1 = np.hstack((F1,sum(F1)/self.number_of_classes))
