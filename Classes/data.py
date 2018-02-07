@@ -93,12 +93,12 @@ class Data(object):
                 FN = FN - VP
                 
                 VN = FP+FN+VP
-                VN = (self.number_of_testingSamples*self.number_of_classes)-VN
+                VN = (np.sum(self.confusion_matrix))-VN
                 
         
                 VPP = VP/(VP+FP)
                 
-                acc = (VP+VN)/(self.number_of_testingSamples*self.number_of_classes)
+                acc = (VP+VN)/(np.sum(self.confusion_matrix))
                 acc = np.hstack((acc,sum(acc)/self.number_of_classes))
                         
                 se = VP / (VP+FN)
