@@ -24,7 +24,7 @@ class Lbp8Bits:
                 p31 = int(self.input_array[i + 1, j - 1] < central)
                 p32 = int(self.input_array[i + 1, j] < central)
                 p33 = int(self.input_array[i + 1, j + 1] < central)
-                output = p13 + p23 * 2 + p33 * 4 + p32 * 8 + p31 * 16 + p21 * 32 + p11 * 64 + p12 * 128
+                output = p11 + p21 * 2 + p31 * 4 + p32 * 8 + p33 * 16 + p23 * 32 + p13 * 64 + p12 * 128
                 self.histogram[output] += 1
                 if not (output in self.att58):
                     self.histogram[-1] += 1
@@ -58,7 +58,7 @@ class Lbp4Bits:
                 p21 = int(self.input_array[i, j - 1] < central)
                 p23 = int(self.input_array[i, j + 1] < central)
                 p32 = int(self.input_array[i + 1, j] < central)
-                output = p12 + p23 * 2 + p32 * 4 + p21 * 8
+                output = p21 + p32 * 2 + p23 * 4 + p12 * 8
                 self.histogram[output] += 1
 
     def set_attributes_values(self, lbp_att):
