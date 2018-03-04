@@ -46,7 +46,7 @@ class Lbp4Bits:
     """"""
     def __init__(self, input_array):
         self.input_array = input_array
-        self.number_of_attributes = np.zeros(16)
+        self.number_of_attributes = 16
         self.histogram = np.zeros(self.number_of_attributes)
 
     def calculate_attributes(self):
