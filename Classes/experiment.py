@@ -44,6 +44,20 @@ class Experiment(object):
 
         return result
 
+    def show_in_table(self):
+        result = ""
+        result += "\n{:^4}\t{:^7}\t{:^7}\t{:^7}\t{:^7}".format("", "acc", "Se", "Es", "F1")
+        mean_r = ""
+        for i, j in enumerate(self.experimentResults):
+            result += "\nR{:02d} \t{:03.04f}".format(i + 1, j.getGeneralMetrics()[0][0][-1] * 100)
+            result += "\t{:03.04f}".format(j.getGeneralMetrics()[0][1][-1] * 100)
+            result += "\t{:03.04f}".format(j.getGeneralMetrics()[0][2][-1] * 100)
+            result += "\t{:03.04f}".format(j.getGeneralMetrics()[0][3][-1] * 100)
+            mean_r += "\nR{:02d} is {}".format(i+1, self.experimentDescript[i])
+
+        result += "\n\n WHEN: " + mean_r
+        return result
+
     def save(self, filename, protocol=0):
         """
                 Saves a compressed object to disk
