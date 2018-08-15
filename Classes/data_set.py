@@ -3,20 +3,20 @@ from data import *
 
 class DataSet(object):
     """
-            Class implemented by Lucas Costa.
-            https://www.github.com/lukkascost
+    Class implemented by Lucas Costa.
+    https://www.github.com/lukkascost
 
-            Created in 30/10/2017
-            Last Modify in 15/08/2018
+    Created in 30/10/2017
+    Last Modify in 15/08/2018
 
-            contact: lucas.costa@lit.ifce.edu.br
-            """
+    contact: lucas.costa@lit.ifce.edu.br
+    """
 
     def __init__(self):
         """
-                        Constructor
-                        initializes the variables with zeros or None.
-                        """
+        Constructor
+        initializes the variables with zeros or None.
+        """
         self.dataSet = []
         self.length = 0
         self.sum_confusion_matrix = None
@@ -29,9 +29,9 @@ class DataSet(object):
     # ----------------------------------------------------------------------
     def append(self, data):
         """
-                        Parameter data: object of class type Data, with results and confusion matrix complete.
-                        adds on self object array the values of complete data object.
-                        """
+        Parameter data: object of class type Data, with results and confusion matrix complete.
+        adds on self object array the values of complete data object.
+        """
         if self.length == 0:
             self.sum_confusion_matrix = np.zeros(data.confusion_matrix.shape)
         self.sum_confusion_matrix = np.add(self.sum_confusion_matrix, data.confusion_matrix)
@@ -77,8 +77,8 @@ class DataSet(object):
 
     def normalize_data_set(self):
         """
-                        Normalize attributes in self object and saves the values of normalization max and min.
-                        """
+        Normalize attributes in self object and saves the values of normalization max and min.
+        """
         self.normalize_between = np.zeros((len(self.attributes[0]), 2))
         for i in range(len(self.attributes[0])):
             self.normalize_between[i, 0] = max(self.attributes[:, i])
@@ -94,7 +94,7 @@ class DataSet(object):
 
     def __str__(self):
         """
-                        """
+        """
         string = "{:#^80}".format(" AVERAGE RESULTS ")
         string += "\n {:^20}\t{:^6}\t{:^6}\t{:^6}\t{:^6}".format("", "acc", "Se", "Es", "F1")
         metrics = None
@@ -132,10 +132,10 @@ class DataSet(object):
 
     def export_as_latex_table(self, label="tab:dataset", caption="Dataset Table"):
         """
-                :param label:
-                :param caption:
-                :return:
-                """
+        :param label:
+        :param caption:
+        :return:
+        """
         caption = caption.replace("%", "\\%")
         metrics = None
         string = "\\begin{table}[htb]\n\\caption{" + caption + "}\n\\label{" + label + "}\n\\begin{" \

@@ -1,3 +1,5 @@
+import cv2
+
 from Classes.data import *
 from Classes.data_set import DataSet
 from Classes.experiment import Experiment
@@ -130,8 +132,8 @@ svm = cv2.SVM()
 oData.params = dict(kernel_type = cv2.SVM_RBF,svm_type = cv2.SVM_C_SVC,gamma=2.0,nu = 0.0,p = 0.0, coef0 = 0)
 
 svm.train(np.float32(oDataSet.attributes[oData.Training_indexes]), np.float32(oDataSet.labels[oData.Training_indexes]), None, None, oData.params)
-
+oData.insert_model(svm)
 results = svm.predict_all(np.float32(oDataSet.attributes[oData.Testing_indexes]))
 oData.set_results_from_classifier(results, oDataSet.labels[oData.Testing_indexes])
 oDataSet.append(oData)
-print oDataSet
+

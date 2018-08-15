@@ -1,4 +1,3 @@
-
 import numpy as np
 
 
@@ -26,8 +25,8 @@ class Data(object):
         self.Testing_indexes = None
         self.Training_indexes = None
         self.model = None
+        self.params = None
 
-    # ----------------------------------------------------------------------
     def random_training_test_by_percent(self, quantity_per_class, percent_train):
         """
         Set in self object the training and testing indexies of attributes list.
@@ -49,22 +48,21 @@ class Data(object):
 
     def random_training_test(self):
         """
-                Set in self object the training and testing indexies of attributes list.
-                Chooses the sets without a specific number of samples of each class.
-                """
+        Set in self object the training and testing indexies of attributes list.
+        Chooses the sets without a specific number of samples of each class.
+        """
         all_indexes = np.arange(
             self.number_of_classes * (self.number_of_testingSamples + self.number_of_trainingSamples))
         np.random.shuffle(all_indexes)
         self.Testing_indexes = all_indexes[self.number_of_classes * self.number_of_trainingSamples:]
         self.Training_indexes = all_indexes[:self.number_of_classes * self.number_of_trainingSamples]
         return True
-        # ----------------------------------------------------------------------
 
     def random_training_test_per_class(self):
         """
-                Set in self object the training and testing indexies of attributes list.
-                Chooses sets with a specific number of samples from each class.
-                """
+        Set in self object the training and testing indexies of attributes list.
+        Chooses sets with a specific number of samples from each class.
+        """
         self.Testing_indexes = []
         self.Training_indexes = []
         array = np.arange(self.number_of_classes * (self.number_of_testingSamples + self.number_of_trainingSamples))
@@ -76,20 +74,18 @@ class Data(object):
         self.Testing_indexes = np.array(self.Testing_indexes)
         self.Training_indexes = np.array(self.Training_indexes)
 
-    # ----------------------------------------------------------------------
     def set_results_from_classifier(self, results, labels):
         """
-                Parameter results: array with results of classfier.
-                Parameter labels: label for each entry in classfier.
-                """
+        Parameter results: array with results of classfier.
+        Parameter labels: label for each entry in classfier.
+        """
         for i, j in enumerate(results):
             self.confusion_matrix[int(labels[i, 0]), int(j[0])] += 1
 
-    # ----------------------------------------------------------------------
     def get_metrics(self):
         """
-                returns the metrics of accuracy, sensitivity and specificity of classifier.
-                """
+        returns the metrics of accuracy, sensitivity and specificity of classifier.
+        """
         v_p = self.confusion_matrix.diagonal()
 
         f_p = np.sum(self.confusion_matrix, axis=0)
@@ -119,6 +115,26 @@ class Data(object):
         es = np.hstack((es, sum(es) / self.number_of_classes))
 
         return np.array([acc, se, es, f1])
+
+    def insert_model(self, model, path="tmp.txt"):
+        """
+
+        :param model:
+        :param path:
+        :return:
+        """
+        model.save(path)
+        self.model = open(path, 'r').read()
+
+    def save_model(self, path):
+        """
+
+        :param path:
+        :return:
+        """
+        if self.model is None:
+            raise Exception("Model not inserted!\n insert the model before to save him.")
+        open(path, "w").write(self.model)
 
     def __str__(self):
         string = "\n" + "\t" * 3 + "acc\tSe\tEs\tF1"
