@@ -1,8 +1,5 @@
-import pickle as pk
-import numpy as np
-import cv2
-import copy
 import gzip
+import pickle as pk
 
 
 class Experiment(object):
@@ -11,7 +8,7 @@ class Experiment(object):
         https://www.github.com/lukkascost
 
         Created in 30/10/2017
-        Last Modify in 06/02/2018
+        Last Modify in 15/08/2018
 
         contact: lucas.costa@lit.ifce.edu.br
         """
@@ -21,65 +18,69 @@ class Experiment(object):
                 Contructor
                 """
         self.experimentResults = []
-        self.experimentDescript = []
+        self.experimentDescription = []
         self.length = 0
 
-    def addDataSet(self, dataSet, description=""):
+    def add_data_set(self, data_set, description=""):
         """
-                Parameter dataSet:
+                Parameter data_set:
                 Optional description:
                 """
-        self.experimentResults.append(dataSet)
-        self.experimentDescript.append(description)
+        self.experimentResults.append(data_set)
+        self.experimentDescription.append(description)
         self.length += 1
 
     def __str__(self):
         """
-                Overwrite the str conversion to print object:
-                """
+        Overwrite the str conversion to print object:
+        """
         result = ""
         for i, j in enumerate(self.experimentResults):
-            result += "*" * 40 + self.experimentDescript[i] + "*" * 40 + "\n"
+            result += "*" * 40 + self.experimentDescription[i] + "*" * 40 + "\n"
             result += str(j) + "\n"
 
         return result
 
     def show_in_table(self):
+        """
+        :return:
+        """
         result = ""
         result += "\n{:^4}\t{:^7}\t{:^7}\t{:^7}\t{:^7}".format("", "acc", "Se", "Es", "F1")
         mean_r = ""
         for i, j in enumerate(self.experimentResults):
-            result += "\nR{:02d} \t{:03.04f}".format(i + 1, j.getGeneralMetrics()[0][0][-1] * 100)
-            result += "\t{:03.04f}".format(j.getGeneralMetrics()[0][1][-1] * 100)
-            result += "\t{:03.04f}".format(j.getGeneralMetrics()[0][2][-1] * 100)
-            result += "\t{:03.04f}".format(j.getGeneralMetrics()[0][3][-1] * 100)
-            mean_r += "\nR{:02d} is {}".format(i+1, self.experimentDescript[i])
+            result += "\nR{:02d} \t{:03.04f}".format(i + 1, j.get_general_metrics()[0][0][-1] * 100)
+            result += "\t{:03.04f}".format(j.get_general_metrics()[0][1][-1] * 100)
+            result += "\t{:03.04f}".format(j.get_general_metrics()[0][2][-1] * 100)
+            result += "\t{:03.04f}".format(j.get_general_metrics()[0][3][-1] * 100)
+            mean_r += "\nR{:02d} is {}".format(i + 1, self.experimentDescription[i])
 
         result += "\n\n WHEN: " + mean_r
         return result
 
     def save(self, filename, protocol=0):
         """
-                Saves a compressed object to disk
-                Parameter filename:
-                Optional Parameter:
-                """
-        fileRes = gzip.GzipFile(filename, 'wb')
-        fileRes.write(pk.dumps(self, protocol))
-        fileRes.close()
-
-    def load(self, filename):
+        Saves a compressed object to disk
+        Parameter filename:
+        Optional Parameter:
         """
-                Loads a compressed object from disk
-                Parameter filename:
-                """
-        fileRes = gzip.GzipFile(filename, 'rb')
-        ClassFile = ""
+        file_res = gzip.GzipFile(filename, 'wb')
+        file_res.write(pk.dumps(self, protocol))
+        file_res.close()
+
+    @staticmethod
+    def load(filename):
+        """
+        Loads a compressed object from disk
+        Parameter filename:
+        """
+        file_res = gzip.GzipFile(filename, 'rb')
+        class_file = ""
         while True:
-            data = fileRes.read()
+            data = file_res.read()
             if data == "":
                 break
-            ClassFile += data
-        result = pk.loads(ClassFile)
-        fileRes.close()
+            class_file += data
+        result = pk.loads(class_file)
+        file_res.close()
         return result

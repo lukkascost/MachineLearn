@@ -21,7 +21,7 @@ from Classes.Extractors.GLCM import GLCM
         #oDataSet = DataSet()
         #bd = ler_arquivo("Classes/Classificators/FEATURES_M{:d}.txt".format(percent))
         #for i in bd:
-                #oDataSet.addSampleOfAtt(np.array(i[0:-1]), np.array(i[-1]))
+                #oDataSet.add_sample_of_attribute(np.array(i[0:-1]), np.array(i[-1]))
         #for it in range(50):
                 #oData = Data(7, 13)
                 #oData.confusion_matrix = 13 * np.random.rand(7, 7)
@@ -33,7 +33,7 @@ from Classes.Extractors.GLCM import GLCM
                         #if not i in t:
                                 #b.append(i)                    
                 #oDataSet.append(oData, t, b)
-        #experimento.addDataSet(oDataSet, description="Dataset do M={:d}:".format(percent))
+        #experimento.add_data_set(oDataSet, description="Dataset do M={:d}:".format(percent))
 #print experimento
 
 #entrada = [[2,1,3,0],[0,1,1,3],[1,3,1,2],[0,1,0,2]]
@@ -93,8 +93,8 @@ from Classes.Extractors.GLCM import GLCM
                 #np.random.shuffle(ar)
                 #ar = ar[:200]
                 #for i in ar:
-                        #obDataSet.addSampleOfAtt(i)
-        ##obDataSet.normalizeDataSet()
+                        #obDataSet.add_sample_of_attribute(i)
+        ##obDataSet.normalize_data_set()
         
         
         #for itIndex in range(niterations):
@@ -102,36 +102,36 @@ from Classes.Extractors.GLCM import GLCM
                 #obData.radndomTrainingTestPerClass()
                 #svm = cv2.SVM()
                 #obData.params = dict(kernel_type = cv2.SVM_RBF,svm_type = cv2.SVM_C_SVC,gamma=2.0,nu = 0.0,p = 0.0, coef0 = 0)
-                #svm.train(np.float32(obDataSet.atributes[obData.Training_indexes]),np.float32(obDataSet.labels[obData.Training_indexes]),None,None,obData.params)
+                #svm.train(np.float32(obDataSet.attributes[obData.Training_indexes]),np.float32(obDataSet.labels[obData.Training_indexes]),None,None,obData.params)
                 #svm.save("asd.txt")
-                #results =  svm.predict_all(np.float32(obDataSet.atributes[obData.Testing_indexes]),np.float32(obDataSet.labels[obData.Testing_indexes]))
-                #obData.setResultsFromClassfier(results, obDataSet.labels[obData.Testing_indexes])        
+                #results =  svm.predict_all(np.float32(obDataSet.attributes[obData.Testing_indexes]),np.float32(obDataSet.labels[obData.Testing_indexes]))
+                #obData.set_results_from_classifier(results, obDataSet.labels[obData.Testing_indexes])
                 #obDataSet.append(obData)
-        #exp.addDataSet(obDataSet, description="Test for {}bits database: ".format(nbits))
+        #exp.add_data_set(obDataSet, description="Test for {}bits database: ".format(nbits))
         #exp.save("file.txt")
         #print exp
 #print exp
 #labelNames = [""]
 
 oDataSet = DataSet()
-oDataSet.addSampleOfAtt(np.array([1.1,1,1,1,1,1,'First_Class']))
-oDataSet.addSampleOfAtt(np.array([2.1,2,2,2,2,2,'Second_Class']))
-oDataSet.addSampleOfAtt(np.array([1.1,1,1,1,1,1,'First_Class']))
-oDataSet.addSampleOfAtt(np.array([2.1,2,2,2,2,2,'Second_Class']))
-oDataSet.addSampleOfAtt(np.array([1.1,1,1,1,1,1,'First_Class']))
-oDataSet.addSampleOfAtt(np.array([2.1,2,2,2,2,2,'Second_Class']))
-oDataSet.addSampleOfAtt(np.array([1.1,1,1,1,1,1,'First_Class']))
-oDataSet.addSampleOfAtt(np.array([2.1,2,2,2,2,2,'Second_Class']))
+oDataSet.add_sample_of_attribute(np.array([1.1, 1, 1, 1, 1, 1, 'First_Class']))
+oDataSet.add_sample_of_attribute(np.array([2.1, 2, 2, 2, 2, 2, 'Second_Class']))
+oDataSet.add_sample_of_attribute(np.array([1.1, 1, 1, 1, 1, 1, 'First_Class']))
+oDataSet.add_sample_of_attribute(np.array([2.1, 2, 2, 2, 2, 2, 'Second_Class']))
+oDataSet.add_sample_of_attribute(np.array([1.1, 1, 1, 1, 1, 1, 'First_Class']))
+oDataSet.add_sample_of_attribute(np.array([2.1, 2, 2, 2, 2, 2, 'Second_Class']))
+oDataSet.add_sample_of_attribute(np.array([1.1, 1, 1, 1, 1, 1, 'First_Class']))
+oDataSet.add_sample_of_attribute(np.array([2.1, 2, 2, 2, 2, 2, 'Second_Class']))
 
 oData = Data(2, 2, samples=4)
-oData.randomTrainingTestByPercent(np.array([4,4]),0.50)
+oData.random_training_test_by_percent(np.array([4, 4]), 0.50)
 
 svm = cv2.SVM()
 oData.params = dict(kernel_type = cv2.SVM_RBF,svm_type = cv2.SVM_C_SVC,gamma=2.0,nu = 0.0,p = 0.0, coef0 = 0)
 
-svm.train(np.float32(oDataSet.atributes[oData.Training_indexes]),np.float32(oDataSet.labels[oData.Training_indexes]),None,None,oData.params)
+svm.train(np.float32(oDataSet.attributes[oData.Training_indexes]), np.float32(oDataSet.labels[oData.Training_indexes]), None, None, oData.params)
 
-results = svm.predict_all(np.float32(oDataSet.atributes[oData.Testing_indexes]))
-oData.setResultsFromClassfier(results, oDataSet.labels[oData.Testing_indexes] )
+results = svm.predict_all(np.float32(oDataSet.attributes[oData.Testing_indexes]))
+oData.set_results_from_classifier(results, oDataSet.labels[oData.Testing_indexes])
 oDataSet.append(oData)
 print oDataSet

@@ -49,7 +49,7 @@ class GLCM:
                 self.coOccurenceNormalized = init + ((endValue*self.coOccurenceMatrix)/(self.input_array.shape[0]*(self.input_array.shape[1] -1))  ) 
                 
         def setAtributesValues(self,glcm_att):
-                "Parameter glcm_att: Array with atributes"
+                "Parameter glcm_att: Array with attributes"
                 self.attributes = glcm_att
                 self.num_att = len(glcm_att)
                 
