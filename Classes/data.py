@@ -1,5 +1,9 @@
+import os
+import warnings
+
 import numpy as np
 
+warnings.filterwarnings("ignore", category=RuntimeWarning)
 
 class Data(object):
     """
@@ -114,7 +118,7 @@ class Data(object):
         es = v_n / (v_n + f_p)
         es = np.hstack((es, sum(es) / self.number_of_classes))
 
-        return np.array([acc, se, es, f1])
+        return np.nan_to_num(np.array([acc, se, es, f1]))
 
     def insert_model(self, model, path="tmp.txt"):
         """
@@ -125,6 +129,8 @@ class Data(object):
         """
         model.save(path)
         self.model = open(path, 'r').read()
+        if path == "tmp.txt":
+            os.remove("tmp.txt")
 
     def save_model(self, path):
         """
