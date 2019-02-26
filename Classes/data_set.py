@@ -1,4 +1,4 @@
-from data import *
+from Classes.data import *
 
 
 class DataSet(object):

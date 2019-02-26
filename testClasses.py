@@ -1,9 +1,7 @@
-import cv2
-
-from Classes.data import *
-from Classes.data_set import DataSet
-from Classes.experiment import Experiment
-from Classes.Extractors.GLCM import GLCM
+from cv2 import *
+import cv2.ml as ml
+from Classes import *
+import numpy as np
 
 #def ler_arquivo(address):
         #arquivo = open(address,"r")                                     ##
@@ -124,16 +122,26 @@ oDataSet.add_sample_of_attribute(np.array([1.1, 1, 1, 1, 1, 1, 'First_Class']))
 oDataSet.add_sample_of_attribute(np.array([2.1, 2, 2, 2, 2, 2, 'Second_Class']))
 oDataSet.add_sample_of_attribute(np.array([1.1, 1, 1, 1, 1, 1, 'First_Class']))
 oDataSet.add_sample_of_attribute(np.array([2.1, 2, 2, 2, 2, 2, 'Second_Class']))
+oDataSet.add_sample_of_attribute(np.array([1.1, 1, 1, 1, 1, 1, 'First_Class']))
+oDataSet.add_sample_of_attribute(np.array([2.1, 2, 2, 2, 2, 2, 'Second_Class']))
+oDataSet.add_sample_of_attribute(np.array([1.1, 1, 1, 1, 1, 1, 'First_Class']))
+oDataSet.add_sample_of_attribute(np.array([2.1, 2, 2, 2, 2, 2, 'Second_Class']))
 
-oData = Data(2, 2, samples=4)
-oData.random_training_test_by_percent(np.array([4, 4]), 0.50)
+oData = Data(2, 2, samples=6)
+oData.random_training_test_by_percent(np.array([6, 6]), 0.50)
 
-svm = cv2.SVM()
-oData.params = dict(kernel_type = cv2.SVM_RBF,svm_type = cv2.SVM_C_SVC,gamma=2.0,nu = 0.0,p = 0.0, coef0 = 0)
-
-svm.train(np.float32(oDataSet.attributes[oData.Training_indexes]), np.float32(oDataSet.labels[oData.Training_indexes]), None, None, oData.params)
+svm = ml.SVM_create()
+svm = svm.create()
+svm.trainAuto(np.float32(oDataSet.attributes[oData.Training_indexes]), ml.ROW_SAMPLE, np.int32(oDataSet.labels[oData.Training_indexes]), kFold=2)
 oData.insert_model(svm)
-results = svm.predict_all(np.float32(oDataSet.attributes[oData.Testing_indexes]))
+print (oData.model)
+results = []
+for i in (oDataSet.attributes[oData.Testing_indexes]):
+    res,cls = svm.predict(np.float32([i]))
+    print (res, cls)
+    results.append(cls[0])
+
 oData.set_results_from_classifier(results, oDataSet.labels[oData.Testing_indexes])
 oDataSet.append(oData)
+print(oData)
 
