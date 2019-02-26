@@ -75,10 +75,10 @@ class Experiment(object):
         Parameter filename:
         """
         file_res = gzip.GzipFile(filename, 'rb')
-        class_file = ""
+        class_file = b''
         while True:
             data = file_res.read()
-            if data == "":
+            if data == b'':
                 break
             class_file += data
         result = pk.loads(class_file)
