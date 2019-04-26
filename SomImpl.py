@@ -1,3 +1,5 @@
+import time
+
 from cv2 import *
 import cv2.ml as ml
 from matplotlib import cm
@@ -14,9 +16,9 @@ mu2, sigma2 = -1, 0.4
 qtd = 500
 
 n_neurons = 16
-neighboards = 0
+neighboards_test = [4, 3, 2, 1]
 learning_rate = 0.2
-epochs = 50
+epochs = 2
 
 s = np.random.normal(mu, sigma, qtd)
 s2 = np.random.normal(mu, sigma, qtd)
@@ -35,7 +37,6 @@ s8 = np.random.normal(mu2, sigma2, qtd)
 c4 = np.column_stack((s7, s8, np.ones(qtd) * 3))
 
 data = np.row_stack((c1, c2, c3, c4))
-
 
 oDataSet = DataSet()
 for i in data:
@@ -58,30 +59,31 @@ def distance(el1, el2):
 
 
 ### Criação da matrix de neuronios
-neurons_matrix = np.zeros((n_neurons, oDataSet.attributes.shape[1]))
+neurons_matrix = np.zeros((n_neurons, 1 , oDataSet.attributes.shape[1]))
 print(neurons_matrix.shape)
+for neighboards in neighboards_test:
+    neurons_matrix.reshape(())
+    for e in range(epochs):
+        time.sleep(1)
+        np.random.shuffle(oData.Training_indexes)
+        for index in oData.Training_indexes:
+            winner = get_winner(neurons_matrix, oDataSet.attributes[index])
+            displacement = learning_rate * (oDataSet.attributes[index] - neurons_matrix[winner])
+            for i in range(winner - neighboards, winner + neighboards):
+                if i >= n_neurons:
+                    continue
+                if i < 0: continue
+                neurons_matrix[i] = neurons_matrix[i] + displacement
+        print(neurons_matrix)
 
-samples_used = []
-for e in range(epochs):
-    np.random.shuffle(oData.Training_indexes)
-    for index in oData.Training_indexes:
-        winner = get_winner(neurons_matrix, oDataSet.attributes[index])
-        displacement = learning_rate * (oDataSet.attributes[index] - neurons_matrix[winner])
-        neurons_matrix[winner] = neurons_matrix[winner] + displacement
+        plt.plot(neurons_matrix[:, 0], neurons_matrix[:, 1], color=COLOR[4])
+        plt.scatter(s, s2, color=COLOR[0])
+        plt.scatter(s3, s4, color=COLOR[1])
+        plt.scatter(s5, s6, color=COLOR[2])
+        plt.scatter(s7, s8, color=COLOR[3])
+        plt.scatter(neurons_matrix[:, 0], neurons_matrix[:, 1], linewidths=2, color=COLOR[4])
 
+        plt.xlim([-2.5, 2.5])
+        plt.ylim([-2.5, 2.5])
 
-    print("EPOCA ", e)
-
-print(neurons_matrix)
-
-plt.plot(neurons_matrix[:, 0], neurons_matrix[:, 1],  color=COLOR[4])
-plt.scatter(s, s2, color=COLOR[0])
-plt.scatter(s3, s4, color=COLOR[1])
-plt.scatter(s5, s6, color=COLOR[2])
-plt.scatter(s7, s8, color=COLOR[3])
-plt.scatter(neurons_matrix[:, 0], neurons_matrix[:, 1], linewidths=2,  color=COLOR[4])
-
-plt.xlim([-2.5, 2.5])
-plt.ylim([-2.5, 2.5])
-
-plt.show()
+        plt.show()
