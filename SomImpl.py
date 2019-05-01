@@ -15,9 +15,9 @@ mu, sigma = 1, 0.4
 mu2, sigma2 = -1, 0.4
 qtd = 500
 
-n_neurons = 16
-neighboards_test = [4, 3, 2, 1]
-learning_rate = 0.2
+n_neurons = 5
+neighboards_test = [4, 3, 2, 1, 0]
+learning_rate = 0.1
 epochs = 2
 
 s = np.random.normal(mu, sigma, qtd)
@@ -50,40 +50,46 @@ print(oData.Training_indexes)
 
 def get_winner(el1, el2):
     d = distance(el1, el2)
-    return np.argmin(d)
+    best_element = np.argmin(d)
+    return np.array([best_element // el1.shape[0], best_element % el1.shape[1]])
 
 
 def distance(el1, el2):
-    distances = (el1 - el2) ** 2
-    return np.sum(distances, axis=1) ** 0.5
+    distances = np.zeros(el1.shape[:2])  # (el1 - el2) ** 2
+    for i in range(el1.shape[0]):
+        for j in range(el1.shape[1]):
+            distances[i, j] = ((el2[0] - el1[i, j, 0]) ** 2 + (el2[1] - el1[i, j, 1]) ** 2) ** .5
+    return distances
 
 
 ### Criação da matrix de neuronios
-neurons_matrix = np.zeros((n_neurons, 1 , oDataSet.attributes.shape[1]))
+neurons_matrix = np.zeros((n_neurons, n_neurons, oDataSet.attributes.shape[1]))
 print(neurons_matrix.shape)
 for neighboards in neighboards_test:
-    neurons_matrix.reshape(())
     for e in range(epochs):
         time.sleep(1)
         np.random.shuffle(oData.Training_indexes)
         for index in oData.Training_indexes:
             winner = get_winner(neurons_matrix, oDataSet.attributes[index])
-            displacement = learning_rate * (oDataSet.attributes[index] - neurons_matrix[winner])
-            for i in range(winner - neighboards, winner + neighboards):
-                if i >= n_neurons:
-                    continue
-                if i < 0: continue
-                neurons_matrix[i] = neurons_matrix[i] + displacement
-        print(neurons_matrix)
+            for i in range(neurons_matrix.shape[0]):
+                for j in range(neurons_matrix.shape[1]):
+                    if (winner[0] - neighboards <= i <= winner[0] + neighboards):
+                        if (winner[1] - neighboards <= j <= winner[1] + neighboards):
+                            neurons_matrix[i, j] = neurons_matrix[i, j] + learning_rate * (
+                                    oDataSet.attributes[index] - neurons_matrix[i, j])
 
-        plt.plot(neurons_matrix[:, 0], neurons_matrix[:, 1], color=COLOR[4])
         plt.scatter(s, s2, color=COLOR[0])
         plt.scatter(s3, s4, color=COLOR[1])
         plt.scatter(s5, s6, color=COLOR[2])
         plt.scatter(s7, s8, color=COLOR[3])
-        plt.scatter(neurons_matrix[:, 0], neurons_matrix[:, 1], linewidths=2, color=COLOR[4])
+        plt.scatter(neurons_matrix[:, :, 0].reshape(n_neurons * n_neurons),
+                    neurons_matrix[:, :, 1].reshape(n_neurons * n_neurons), linewidths=2, color=COLOR[4])
 
+        for i in range(n_neurons*n_neurons):
+            plt.annotate(str(i//n_neurons)+","+ str(i%n_neurons), (neurons_matrix[i//n_neurons, i%n_neurons,0], neurons_matrix[i//n_neurons, i%n_neurons,1]))
         plt.xlim([-2.5, 2.5])
         plt.ylim([-2.5, 2.5])
 
         plt.show()
+
+
