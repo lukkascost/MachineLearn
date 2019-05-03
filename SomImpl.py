@@ -16,8 +16,8 @@ COLOR = cm.rainbow(np.linspace(0, 1, 8))
 # qtd = 500
 
 n_neurons = 40
-i_learning_rate = 0.01
-epochs = 10
+i_learning_rate = 0.1
+epochs = 20
 n_class = 7
 
 k_nn = 5
@@ -142,7 +142,7 @@ for ep in range(epochs):
             plt.scatter(x, y, linewidths=1, color=COLOR[int(labels[x, y])])
 
     plt.legend(loc='upper left', bbox_to_anchor=(1.04, 1))
-    plt.savefig("Test_{:3d}.png".format(ep), dpi=300, bbox_inches="tight")
+    plt.savefig("FIG_5/Test_{:3d}.png".format(ep), dpi=300, bbox_inches="tight")
     plt.show()
 
 
@@ -157,7 +157,6 @@ for ep in range(epochs):
             plt.scatter(neurons_matrix[x,y,0], neurons_matrix[x,y,1], linewidths=1, color=COLOR[int(labels[x, y])])
 
     plt.legend(loc='upper left', bbox_to_anchor=(1.04, 1))
-    plt.savefig("U_{:3d}.png".format(ep), dpi=300, bbox_inches="tight")
+    plt.savefig("FIG_6/U_{:3d}.png".format(ep), dpi=300, bbox_inches="tight")
     plt.show()
-
 
