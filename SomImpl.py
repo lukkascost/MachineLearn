@@ -14,7 +14,7 @@ from Classes.Cluster.SOM import SOM, distance
 COLOR = cm.rainbow(np.linspace(0, 1, 8))
 
 n_neurons = 40
-i_learning_rate = 0.01
+i_learning_rate = 0.1
 epochs = 2
 n_class = 7
 
@@ -26,7 +26,7 @@ att = np.loadtxt("../Fluxo_experiments/GLCM/EXP_01/FEATURES_M1_CM8b.txt", usecol
 label = np.loadtxt("../Fluxo_experiments/GLCM/EXP_01/FEATURES_M1_CM8b.txt", usecols=-1, dtype=object, delimiter=",")
 
 # initial neighbourhood radius
-init_radius = np.max([n_neurons, n_neurons]) / 2
+init_radius = np.max([n_neurons, n_neurons])
 # radius decay parameter
 
 oDataSet = DataSet()

@@ -15,6 +15,7 @@ class SOM:
                 winner = get_winner(self.neurons_matrix, att)
                 radius = decay_radius(init_radius, itera, time_constant)
                 learning_rate = decay_learning_rate(i_learning_rate, itera, len(data))
+                print(radius, learning_rate)
 
                 for i in range(self.neurons_matrix.shape[0]):
                     for j in range(self.neurons_matrix.shape[1]):
