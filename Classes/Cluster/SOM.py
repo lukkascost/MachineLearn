@@ -2,6 +2,7 @@ import numpy as np
 import gzip
 import pickle as pk
 
+
 class SOM:
     def __init__(self, epoch, n_neurons, attributes_dimension):
         self.epochs = epoch
@@ -10,6 +11,7 @@ class SOM:
         self.neurons_matrix = np.zeros((n_neurons, n_neurons, attributes_dimension))
         self.hist_neurons_matrix = []
         self.hist_error = []
+        self.neurons_labels = np.zeros((n_neurons, n_neurons, 1))
 
     def cluster_data(self, data, init_radius, i_learning_rate):
         time_constant = 0.0001
@@ -41,8 +43,8 @@ class SOM:
             if ep == 0:
                 ep += 1
                 continue
-            print("Condicao de parada",abs(self.hist_error[ep - 1] - self.hist_error[ep]))
-            if abs(self.hist_error[ep - 1] - self.hist_error[ep]) < 0.0005 or ep >30:
+            print("Condicao de parada", abs(self.hist_error[ep - 1] - self.hist_error[ep]))
+            if abs(self.hist_error[ep - 1] - self.hist_error[ep]) < 0.0005 or ep > 30:
                 continues = False
             ep += 1
 
