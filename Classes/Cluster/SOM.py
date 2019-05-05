@@ -14,8 +14,8 @@ class SOM:
         self.neurons_labels = np.zeros((n_neurons, n_neurons, 1))
 
     def cluster_data(self, data, init_radius, i_learning_rate):
-        time_constant = 0.0001
-        time_constant2 = 0.00001
+        time_constant = 0.0002
+        time_constant2 = 0.0002
 
         print("Iniciando Treinamento...")
         continues = True
@@ -44,7 +44,7 @@ class SOM:
                 ep += 1
                 continue
             print("Condicao de parada", abs(self.hist_error[ep - 1] - self.hist_error[ep]))
-            if abs(self.hist_error[ep - 1] - self.hist_error[ep]) < 0.0005 or ep > 30:
+            if abs(self.hist_error[ep - 1] - self.hist_error[ep]) < 0.00005:# or ep > 30:
                 continues = False
             ep += 1
 
