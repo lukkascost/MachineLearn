@@ -79,8 +79,38 @@ n_class = 7
 k_nn = 13
 exp = Experiment.load("Experiment_01.gzip")
 for oDataSet in exp.experimentResults:
+    train_number = 0
     for oData in oDataSet.dataSet:
+        train_number  += 1
         som = oData.model
+
+
+        plt.figure(1)
+        plt.plot([x for x in range(len(som.hist_error))], som.hist_error)
+        plt.figure(3)
+        plt.plot([x for x in range(len(som.hist_error))], som.hist_error)
+
+        ok = np.zeros((n_class, 1))
+        for i in range(n_neurons ** 2):
+            x = i // n_neurons
+            y = i % n_neurons
+            if ok[int(som.neurons_labels[x, y])] == 0:
+                plt.figure(2)
+                plt.scatter(x, y, linewidths=1, color=COLOR[int(som.neurons_labels[x, y])],
+                            label="{}".format(oDataSet.labelsNames[int(som.neurons_labels[x, y])]))
+                ok[int(som.neurons_labels[x, y])] = 1
+            else:
+                plt.figure(2)
+                plt.scatter(x, y, linewidths=1, color=COLOR[int(som.neurons_labels[x, y])])
+        plt.figure(2)
+        plt.legend(loc='upper left', bbox_to_anchor=(1.04, 1))
+
+        plt.figure(2).savefig("FIG1/Train_{:02d}.png".format(train_number), dpi=300, bbox_inches="tight")
+        plt.figure(2).show()
+
+        plt.figure(3).savefig("FIG1/Errors_{:02d}.png".format(train_number), dpi=300, bbox_inches="tight")
+        plt.figure(3).show()
+
         labels = np.zeros((oDataSet.attributes[oData.Testing_indexes].shape[0], 1))
         for m, i in enumerate(oDataSet.attributes[oData.Testing_indexes]):
             count_label = np.zeros((n_class, 1))
@@ -95,5 +125,9 @@ for oDataSet in exp.experimentResults:
         oDataSet.sum_confusion_matrix += oData.confusion_matrix
         # print(oData)
     print(oDataSet)
-    print(oDataSet.sum_confusion_matrix)
+    print(oDataSet.sum_confusion_matrix / 50)
+plt.xlim([0, 30])
+plt.ylim([0, 5])
+plt.show()
+plt.figure(1).savefig("FIG1/errors_all.png".format(), dpi=300, bbox_inches="tight")
 
