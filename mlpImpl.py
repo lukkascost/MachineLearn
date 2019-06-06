@@ -9,8 +9,8 @@ from Classes.Classificators.multilayer_perceptron import MLPClassifier_lucas
 X = np.loadtxt("../Fluxo_experiments/GLCM/EXP_01/FEATURES_M1_CM8b.txt", delimiter=',', usecols=[x for x in range(24)])
 Y = np.loadtxt("../Fluxo_experiments/GLCM/EXP_01/FEATURES_M1_CM8b.txt", delimiter=',', usecols=-1, dtype=object)
 
-oExp = Experiment()
-for neurons in range(60, 33, -1):
+oExp = Experiment.load("Experiment_01_03_MLP_NEURON.gzip")
+for neurons in range(10, 0, -1):
     oDataSet = DataSet()
 
     for j, i in enumerate(X):
@@ -53,8 +53,8 @@ for neurons in range(60, 33, -1):
         oData.model = clf
         oDataSet.append(oData)
     oExp.add_data_set(oDataSet, "Experimento variando neuronios na camada escondida {} .".format(neurons))
-    oExp.save("Experiment_01_01_MLP_NEURON_BK.gzip")
-    oExp.save("Experiment_01_01_MLP_NEURON.gzip")
+    oExp.save("Experiment_01_03_MLP_NEURON_BK.gzip")
+    oExp.save("Experiment_01_03_MLP_NEURON.gzip")
     print(oExp)
-oExp = Experiment.load("Experiment_01_02_MLP_NEURON.gzip")
+oExp = Experiment.load("Experiment_01_03_MLP_NEURON.gzip")
 print(oExp)
