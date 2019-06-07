@@ -92,7 +92,7 @@ class MLPClassifier_lucas(BaseMultilayerPerceptron, ClassifierMixin):
         y_pred = self._predict(X)
         if self.n_outputs_ == 1:
             y_pred = y_pred.ravel()
-        return self._label_binarizer.inverse_transform(y_pred)
+        return self._label_binarizer.inverse_transform(y_pred), y_pred
 
     def fit(self, X, y):
         return self._fit(X, y, incremental=(self.warm_start and
