@@ -105,7 +105,7 @@ class Data(object):
         v_p_p[np.isnan(v_p_p)] = 0.0
 
         acc = (v_p + v_n) / (np.sum(self.confusion_matrix))
-        acc = np.hstack((acc, self.confusion_matrix.diagonal() / np.sum(self.confusion_matrix)))
+        acc = np.hstack((acc, sum(acc) / self.number_of_classes))
 
         se = v_p / (v_p + f_n)
         f1 = 2 * v_p_p * se
